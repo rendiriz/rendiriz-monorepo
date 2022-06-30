@@ -3,17 +3,90 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test"
+    "*** Development ***": "",
+    "dev:personal": "nx serve personal",
+    "*** Other ***": "",
+    "prepare": "husky install"
   },
   "private": true,
-  "dependencies": {},
   "devDependencies": {
-    "nx": "14.3.6",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@nrwl/cli": "14.3.6",
+    "@nrwl/cypress": "14.3.6",
+    "@nrwl/eslint-plugin-nx": "14.3.6",
+    "@nrwl/jest": "14.3.6",
+    "@nrwl/linter": "14.3.6",
+    "@nrwl/next": "^14.3.6",
+    "@nrwl/react": "14.3.6",
+    "@nrwl/web": "14.3.6",
     "@nrwl/workspace": "14.3.6",
-    "typescript": "~4.7.2",
-    "prettier": "^2.6.2"
+    "@testing-library/react": "13.3.0",
+    "@types/jest": "27.4.1",
+    "@types/node": "16.11.7",
+    "@types/react": "18.0.13",
+    "@types/react-dom": "18.0.5",
+    "@typescript-eslint/eslint-plugin": "~5.24.0",
+    "@typescript-eslint/parser": "~5.24.0",
+    "autoprefixer": "^10.4.7",
+    "babel-jest": "27.5.1",
+    "cypress": "^9.1.0",
+    "eslint": "~8.15.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-next": "12.1.6",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-cypress": "^2.10.3",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "7.30.0",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "^8.0.1",
+    "jest": "27.5.1",
+    "lint-staged": "^13.0.3",
+    "lockfile-lint": "^4.7.5",
+    "nx": "14.3.6",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "react-test-renderer": "18.2.0",
+    "sass": "1.52.3",
+    "stylelint": "^14.9.1",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "tailwindcss": "^3.1.4",
+    "ts-jest": "27.1.4",
+    "ts-node": "~10.8.0",
+    "typescript": "~4.7.2"
+  },
+  "dependencies": {
+    "@nrwl/next": "14.3.6",
+    "core-js": "^3.6.5",
+    "next": "12.1.6",
+    "next-themes": "^0.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "regenerator-runtime": "0.13.7",
+    "tslib": "^2.3.0"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,md,scss,json,yml}": [
+      "prettier --write"
+    ],
+    "apps/**/*.{js,ts}": [
+      "eslint --fix"
+    ],
+    "libs/**/*.{js,ts}": [
+      "eslint --fix"
+    ],
+    "apps/**/*.{css,scss}": [
+      "stylelint --fix"
+    ],
+    "libs/**/*.{css,scss}": [
+      "stylelint --fix"
+    ],
+    "package.json": [
+      "lockfile-lint --path package-lock.json --type npm --allowed-hosts npm yarn --validate-https"
+    ]
   }
 }

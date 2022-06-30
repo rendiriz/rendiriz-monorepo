@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss"
+  ],
+  "ignoreFiles": ["**/.next/**", "**/coverage/**", "**/node_modules/**"]
+}

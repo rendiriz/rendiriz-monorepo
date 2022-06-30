@@ -1,0 +1,39 @@
+{
+  "extends": [
+    "plugin:@nrwl/nx/react-typescript",
+    ".eslintrc.json",
+    "next",
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@next/next/no-html-link-for-pages": ["error", "apps/personal/pages"]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "object-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off"
+  },
+  "env": {
+    "jest": true
+  }
+}
