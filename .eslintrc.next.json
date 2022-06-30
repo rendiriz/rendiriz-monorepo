@@ -29,9 +29,17 @@
   ],
   "rules": {
     "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default": "off",
     "object-curly-newline": "off",
+    "operator-linebreak": "off",
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-return": "off"
   },
   "env": {
     "jest": true

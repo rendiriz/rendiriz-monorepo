@@ -14,7 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@rendiriz-ecosystem/personal/components": [
+        "libs/personal/components/src/index.ts"
+      ],
+      "@rendiriz-ecosystem/personal/hooks": [
+        "libs/personal/hooks/src/index.ts"
+      ],
+      "@rendiriz-ecosystem/personal/templates": [
+        "libs/personal/templates/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

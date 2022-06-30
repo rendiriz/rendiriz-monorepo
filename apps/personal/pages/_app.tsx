@@ -1,15 +1,22 @@
-import React from 'react';
-import { AppProps } from 'next/app';
+import { ComponentType } from 'react';
+import { NextComponentType } from 'next';
+import type { AppProps } from 'next/app';
 import './styles.scss';
 
 import { ThemeProvider } from 'next-themes';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+interface AppWithLayout extends AppProps {
+  Component: NextComponentType & { Layout: ComponentType };
+}
+
+function MyApp({ Component, pageProps }: AppWithLayout) {
+  const getLayout: any = Component.Layout || ((page: any) => page);
+
   return (
     <ThemeProvider attribute="class">
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   );
 }
 
-export default CustomApp;
+export default MyApp;

@@ -3,6 +3,9 @@
   "version": 2,
   "projects": {
     "personal": "apps/personal",
-    "personal-e2e": "apps/personal-e2e"
+    "personal-components": "libs/personal/components",
+    "personal-e2e": "apps/personal-e2e",
+    "personal-hooks": "libs/personal/hooks",
+    "personal-templates": "libs/personal/templates"
   }
 }
