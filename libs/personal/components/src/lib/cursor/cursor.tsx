@@ -1,16 +1,46 @@
+import { useCallback, useRef } from 'react';
+import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import styles from './cursor.module.scss';
 
 export function Cursor() {
+  const cursor = useRef<HTMLInputElement>(null);
+
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    gsap.to(cursor.current, {
+      top: event.clientY,
+      left: event.clientX,
+    });
+  }, []);
+
+  const handleLinkEnter = useCallback(() => {
+    if (cursor.current) {
+      cursor.current.classList.add(styles.linkHover);
+    }
+  }, []);
+
+  const handleLinkLeave = useCallback(() => {
+    if (cursor.current) {
+      cursor.current.classList.remove(styles.linkHover);
+    }
+  }, []);
+
   useIsomorphicLayoutEffect(() => {
-    console.log(
-      "In the browser, I'm an `useLayoutEffect`, but in SSR, I'm an `useEffect`.",
-    );
+    window.addEventListener('mousemove', handleMouseMove);
+
+    const activeLinks = document.querySelectorAll('.link-hover');
+
+    [].forEach.call(activeLinks, (activeLink: any) => {
+      activeLink.addEventListener('mouseenter', handleLinkEnter);
+      activeLink.addEventListener('mouseleave', handleLinkLeave);
+    });
+
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <div className={styles.main}>
-      <h1>Welcome to Cursor!</h1>
+    <div ref={cursor} className={styles.main}>
+      <div />
     </div>
   );
 }

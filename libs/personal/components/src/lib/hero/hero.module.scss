@@ -1,0 +1,4 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply max-w-[1920px] mx-auto px-6 md:px-16 lg:px-20 xl:px-52 py-40;
+}

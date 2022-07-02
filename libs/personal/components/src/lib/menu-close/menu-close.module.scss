@@ -1,0 +1,76 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply flex items-center justify-center;
+  @apply z-10 fixed top-0 right-0 bottom-auto left-auto;
+  @apply mx-6 lg:mx-20 my-8 lg:my-16;
+  @apply pointer-events-none;
+
+  .text {
+    @apply block absolute pointer-events-none;
+
+    svg {
+      @apply hidden lg:block w-full opacity-0;
+
+      transform: scale(1);
+      transition: 0.4s;
+    }
+  }
+
+  .button {
+    @apply flex flex-col items-center content-center justify-center;
+    @apply w-[83px] h-[83px];
+    @apply rounded-full cursor-pointer pointer-events-auto bg-none opacity-0;
+
+    transform: scale(0.3);
+    transition: 0.3s;
+
+    .box {
+      @apply w-10 h-10 flex flex-col items-center justify-center;
+
+      .first,
+      .second {
+        width: 50%;
+        height: 4px;
+        transition: 0.4s;
+      }
+
+      .first {
+        transform: rotate(45deg);
+      }
+
+      .second {
+        transform: rotate(-45deg);
+        margin-top: -4px;
+      }
+    }
+
+    &:hover {
+      .first,
+      .second {
+        width: 100%;
+      }
+    }
+  }
+
+  &:hover {
+    .text {
+      svg {
+        @apply opacity-100;
+
+        transform: scale(1.7);
+      }
+    }
+  }
+
+  &.mainMenu {
+    z-index: 20;
+    visibility: visible;
+    pointer-events: auto;
+
+    .button {
+      @apply opacity-100;
+
+      transform: scale(1);
+    }
+  }
+}

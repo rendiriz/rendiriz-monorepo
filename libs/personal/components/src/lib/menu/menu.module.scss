@@ -1,0 +1,124 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply flex items-center justify-center;
+  @apply z-10 fixed top-0 right-0 bottom-auto left-auto;
+  @apply mx-6 lg:mx-20 my-8 lg:my-16;
+  @apply pointer-events-none;
+
+  .text {
+    @apply block absolute pointer-events-none;
+
+    svg {
+      @apply hidden lg:block w-full opacity-0;
+
+      transform: scale(1);
+      transition: 0.4s;
+    }
+  }
+
+  &:hover {
+    .text {
+      svg {
+        @apply opacity-100;
+
+        transform: scale(1.7);
+      }
+    }
+  }
+}
+
+.button {
+  @apply flex items-center justify-center;
+  @apply w-[83px] h-[83px];
+  @apply rounded-full cursor-pointer pointer-events-auto bg-none;
+
+  .box {
+    @apply w-10 h-10 flex flex-col items-center justify-center;
+
+    .line {
+      @apply relative w-full h-[4px];
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        transition: 0.4s;
+      }
+
+      &.first {
+        bottom: 10px;
+
+        &::before {
+          right: 0;
+          width: 100%;
+        }
+
+        &::after {
+          left: 0;
+          width: 0;
+        }
+      }
+
+      &.second {
+        &::before {
+          left: 0;
+          width: 70%;
+        }
+
+        &::after {
+          right: 0;
+          width: 0;
+        }
+      }
+
+      &.third {
+        top: 10px;
+
+        &::before {
+          right: 0;
+          width: 70%;
+        }
+
+        &::after {
+          left: 0;
+          width: 0;
+        }
+      }
+    }
+
+    &:hover {
+      .line {
+        &.first {
+          &::before {
+            width: 0;
+          }
+
+          &::after {
+            width: 70%;
+          }
+        }
+
+        &.second {
+          &::before {
+            width: 0;
+          }
+
+          &::after {
+            width: 70%;
+          }
+        }
+
+        &.third {
+          &::before {
+            width: 0;
+          }
+
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

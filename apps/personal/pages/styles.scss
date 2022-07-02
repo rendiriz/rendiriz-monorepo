@@ -1,4 +1,43 @@
 /* stylelint-disable scss/at-rule-no-unknown */
+/* stylelint-disable selector-class-pattern */
 @tailwind components;
 @tailwind base;
 @tailwind utilities;
+
+html.has-scroll-smooth {
+  @apply overflow-hidden;
+}
+
+html.has-scroll-dragging {
+  @apply select-none;
+}
+
+.has-scroll-smooth body {
+  @apply overflow-hidden;
+}
+
+.has-scroll-smooth .content {
+  @apply min-h-screen;
+}
+
+.c-scrollbar {
+  @apply absolute top-0 right-0 w-[11px] h-screen opacity-0;
+
+  transform-origin: center right;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.c-scrollbar:hover {
+  transform: scaleX(1.45);
+}
+
+.c-scrollbar:hover,
+.has-scroll-scrolling .c-scrollbar,
+.has-scroll-dragging .c-scrollbar {
+  @apply opacity-100;
+}
+
+.c-scrollbar_thumb {
+  @apply absolute top-0 right-0 w-[7px] rounded-xl m-[2px];
+  @apply bg-stone-800 dark:bg-slate-200;
+}

@@ -3,5 +3,8 @@
     "stylelint-config-standard-scss",
     "stylelint-config-prettier-scss"
   ],
+  "rules": {
+    "selector-class-pattern": "false"
+  },
   "ignoreFiles": ["**/.next/**", "**/coverage/**", "**/node_modules/**"]
 }
