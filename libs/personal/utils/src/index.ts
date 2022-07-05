@@ -1,1 +1,1 @@
-export * from './lib/personal-utils';
+export * from './lib/animation';

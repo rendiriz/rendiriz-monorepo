@@ -1,58 +1,29 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { gsap } from 'gsap';
 import {
-  LOADING_BACKGROUND,
-  LOADING_LETTER,
-} from '@rendiriz-ecosystem/personal/constants';
+  animationLoadingInitialStart,
+  animationLoadingInitialEnd,
+  animationLoadingRouterStart,
+  animationLoadingRouterlEnd,
+} from '@rendiriz-ecosystem/personal/utils';
 import styles from './loading.module.scss';
 
 export function Loading() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const bg = useRef<HTMLInputElement>(null);
-  const text = useRef<HTMLInputElement>(null);
-  const letter = useRef<any>([]);
 
   const letters = 'Loading...'.split('');
 
   const aniStartInitial = useCallback(() => {
     console.log('Animation Start');
 
-    const tl = gsap.timeline();
-    tl.fromTo(
-      bg.current,
-      {
-        height: '0%',
-      },
-      {
-        delay: LOADING_BACKGROUND,
-        height: '100%',
-        duration: LOADING_BACKGROUND,
-      },
-    );
-    tl.fromTo(
-      text.current,
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-      },
-    );
-    tl.fromTo(
-      letter.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        stagger: LOADING_LETTER,
-        y: 0,
-      },
-    );
+    const tl = animationLoadingInitialStart({
+      loadingBackground: styles.background,
+      loadingText: styles.text,
+      loadingLetter: styles.letter,
+    });
+
     tl.eventCallback('onComplete', function () {
       console.log('Animation Complete');
       setIsLoading(false);
@@ -62,41 +33,35 @@ export function Loading() {
   const aniEndInitial = useCallback(() => {
     console.log('Animation End');
 
-    const tl = gsap.timeline();
-    tl.fromTo(
-      letter.current,
-      {
-        opacity: 1,
-        y: 0,
-      },
-      {
-        opacity: 0,
-        stagger: LOADING_LETTER,
-        y: -50,
-      },
-    );
-    tl.fromTo(
-      text.current,
-      {
-        opacity: 1,
-      },
-      {
-        opacity: 0,
-      },
-    );
-    tl.fromTo(
-      bg.current,
-      {
-        height: '100%',
-      },
-      {
-        height: '0%',
-        duration: LOADING_BACKGROUND,
-      },
-    );
+    const tl = animationLoadingInitialEnd({
+      loadingBackground: styles.background,
+      loadingText: styles.text,
+      loadingLetter: styles.letter,
+    });
+
     tl.eventCallback('onComplete', function () {
       console.log('Animation Complete');
       setIsLoading(false);
+    });
+  }, []);
+
+  const aniStartRouter = useCallback(() => {
+    console.log('Animation Start');
+
+    animationLoadingRouterStart({
+      loadingBackground: styles.background,
+      loadingText: styles.text,
+      loadingLetter: styles.letter,
+    });
+  }, []);
+
+  const aniEndRouter = useCallback(() => {
+    console.log('Animation End');
+
+    animationLoadingRouterlEnd({
+      loadingBackground: styles.background,
+      loadingText: styles.text,
+      loadingLetter: styles.letter,
     });
   }, []);
 
@@ -107,80 +72,6 @@ export function Loading() {
       aniEndInitial();
     }
   }, [isLoading]);
-
-  const aniStartRouter = useCallback(() => {
-    console.log('Animation Start');
-
-    const tl = gsap.timeline();
-    tl.fromTo(
-      bg.current,
-      {
-        height: '0%',
-      },
-      {
-        height: '100%',
-        duration: LOADING_BACKGROUND,
-      },
-    );
-    tl.fromTo(
-      text.current,
-      {
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-      },
-    );
-    tl.fromTo(
-      letter.current,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        stagger: LOADING_LETTER,
-        y: 0,
-      },
-    );
-  }, []);
-
-  const aniEndRouter = useCallback(() => {
-    console.log('Animation End');
-
-    const tl = gsap.timeline();
-    tl.fromTo(
-      letter.current,
-      {
-        y: 0,
-      },
-      {
-        delay: LOADING_BACKGROUND * 2 + letters.length * LOADING_LETTER,
-        opacity: 0,
-        stagger: LOADING_LETTER,
-        y: -50,
-      },
-    );
-    tl.fromTo(
-      text.current,
-      {
-        opacity: 1,
-      },
-      {
-        opacity: 0,
-      },
-    );
-    tl.fromTo(
-      bg.current,
-      {
-        height: '100%',
-      },
-      {
-        height: '0%',
-        duration: LOADING_BACKGROUND,
-      },
-    );
-  }, []);
 
   useEffect(() => {
     router.events.on('routeChangeStart', aniStartRouter);
@@ -196,14 +87,10 @@ export function Loading() {
 
   return (
     <div className={classNames(styles.main)}>
-      <div ref={bg} className={classNames(styles.background)} />
-      <div ref={text} className={classNames(styles.text)}>
+      <div className={classNames(styles.background)} />
+      <div className={classNames(styles.text)}>
         {letters.map((l, i) => (
-          <span
-            key={i}
-            ref={(el) => (letter.current[i] = el)}
-            className={classNames(styles.letter)}
-          >
+          <span key={i} className={classNames(styles.letter)}>
             {l}
           </span>
         ))}
