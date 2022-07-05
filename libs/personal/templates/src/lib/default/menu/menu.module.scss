@@ -2,7 +2,7 @@
 .main {
   @apply flex items-center justify-center;
   @apply z-10 fixed top-0 right-0 bottom-auto left-auto;
-  @apply mx-6 lg:mx-20 my-8 lg:my-16;
+  @apply mx-6 lg:mr-20 my-8 lg:my-16;
   @apply pointer-events-none;
 
   .text {

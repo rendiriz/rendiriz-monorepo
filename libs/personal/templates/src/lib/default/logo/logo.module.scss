@@ -1,0 +1,10 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply z-10 fixed top-0 right-auto bottom-auto left-0 px-6 lg:pl-20 py-8 lg:py-16;
+
+  svg {
+    path {
+      mix-blend-mode: difference;
+    }
+  }
+}

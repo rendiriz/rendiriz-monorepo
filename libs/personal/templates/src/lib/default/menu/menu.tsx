@@ -16,6 +16,8 @@ export function Menu() {
     const content = document.querySelector(`.content`);
     const mainMenu = document.querySelector(`.main-menu`);
     const mainMenuBg = document.querySelector(`.main-menu-background`);
+    const mainMenuListPrimary = document.querySelector(`.list-primary`);
+    const mainMenuListSecondary = document.querySelector(`.list-secondary`);
 
     gsap.to(logo, {
       delay: 0.9,
@@ -47,6 +49,32 @@ export function Menu() {
       duration: 0.8,
       ease: 'power1.in',
     });
+
+    gsap.fromTo(
+      mainMenuListPrimary,
+      {
+        opacity: 0,
+        y: -100,
+      },
+      {
+        delay: 0.8,
+        opacity: 1,
+        y: 0,
+      },
+    );
+
+    gsap.fromTo(
+      mainMenuListSecondary,
+      {
+        opacity: 0,
+        y: 100,
+      },
+      {
+        delay: 0.8,
+        opacity: 1,
+        y: 0,
+      },
+    );
   }, []);
 
   return (

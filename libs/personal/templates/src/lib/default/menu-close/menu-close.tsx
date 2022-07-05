@@ -13,6 +13,8 @@ export function MenuClose() {
     const content = document.querySelector(`.content`);
     const mainMenu = document.querySelector(`.main-menu`);
     const mainMenuBg = document.querySelector(`.main-menu-background`);
+    const mainMenuListPrimary = document.querySelector(`.list-primary`);
+    const mainMenuListSecondary = document.querySelector(`.list-secondary`);
 
     gsap.to(logo, {
       opacity: 0,
@@ -28,14 +30,41 @@ export function MenuClose() {
     gsap.to(mainMenu, {
       pointerEvents: 'none',
       visibility: 'hidden',
-      delay: 0.8,
+      delay: 1.6,
     });
 
     gsap.to(mainMenuBg, {
       width: '0',
+      delay: 0.8,
       duration: 0.8,
       ease: 'power1.out',
     });
+
+    gsap.fromTo(
+      mainMenuListPrimary,
+      {
+        duration: 0.8,
+        opacity: 1,
+        y: 0,
+      },
+      {
+        opacity: 0,
+        y: -100,
+      },
+    );
+
+    gsap.fromTo(
+      mainMenuListSecondary,
+      {
+        duration: 0.8,
+        opacity: 1,
+        y: 0,
+      },
+      {
+        opacity: 0,
+        y: 100,
+      },
+    );
   }, []);
 
   return (

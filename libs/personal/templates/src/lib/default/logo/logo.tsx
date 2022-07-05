@@ -2,14 +2,9 @@ import Link from 'next/link';
 import classNames from 'classnames';
 import styles from './logo.module.scss';
 
-export function Logo({ type }: any) {
+export function Logo() {
   return (
-    <header
-      data-scroll-section
-      className={classNames('logo', styles.main, {
-        'opacity-0': type === 'menu',
-      })}
-    >
+    <header className={classNames('logo', styles.main)}>
       <Link href="/">
         <a className={`text-stone-800 dark:text-slate-200 link-hover`}>
           <svg

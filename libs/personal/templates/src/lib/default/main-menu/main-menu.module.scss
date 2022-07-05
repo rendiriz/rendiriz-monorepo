@@ -1,0 +1,34 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  .listPrimary {
+    li {
+      @apply w-full relative m-0 py-2 md:py-3 xl:py-4;
+
+      // &::after {
+      //   content: '';
+      //   position: absolute;
+      //   bottom: 0;
+      //   top: 0;
+      //   left: 0;
+      //   right: 0;
+      //   z-index: 8;
+      //   transform: scaleY(0);
+      //   transform-origin: center top;
+      //   transition: transform .5s cubic-bezier(0.22, 0.61, 0.36, 1);
+      // }
+
+      // &:hover {
+      //   &::after {
+      //     transform: scaleY(1);
+      //     transform-origin: center bottom;
+      //   }
+      // }
+    }
+  }
+
+  .listSecondary {
+    li {
+      @apply w-full relative m-0 py-2;
+    }
+  }
+}

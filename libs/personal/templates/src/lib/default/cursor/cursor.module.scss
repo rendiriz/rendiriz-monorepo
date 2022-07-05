@@ -1,0 +1,50 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply hidden lg:flex z-[1000000] w-2.5 h-2.5 bg-transparent border border-solid border-sky-700 rounded-full fixed pointer-events-none;
+
+  transform: translate(-50%, -50%);
+  transition: height 500ms, width 500ms;
+}
+
+.work,
+.about,
+.blog {
+  @apply text-lg text-stone-200 top-1/2 left-1/2 block absolute opacity-0 text-center leading-6;
+
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 400ms;
+}
+
+.linkHover {
+  @apply bg-stone-900 dark:bg-slate-900 w-20 h-20 mix-blend-difference border-none;
+}
+
+.menuWorkHover {
+  @apply bg-red-500 w-40 h-40 border-none;
+
+  .work {
+    @apply opacity-100;
+
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.menuAboutHover {
+  @apply bg-red-500 w-40 h-40 border-none;
+
+  .about {
+    @apply opacity-100;
+
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.menuBlogHover {
+  @apply bg-red-500 w-40 h-40 border-none;
+
+  .blog {
+    @apply opacity-100;
+
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

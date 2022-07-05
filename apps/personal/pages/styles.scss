@@ -1,8 +1,37 @@
+/* stylelint-disable font-family-name-quotes */
 /* stylelint-disable scss/at-rule-no-unknown */
 /* stylelint-disable selector-class-pattern */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Marcellus&display=swap');
+
 @tailwind components;
 @tailwind base;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'TG Siloka Sundanesse';
+  src: url('../fonts/tg-siloka-sundanesse/TGSilokaSundanese-Light.otf');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TG Siloka Sundanesse';
+  src: url('../fonts/tg-siloka-sundanesse/TGSilokaSundanese-Regular.otf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TG Siloka Sundanesse';
+  src: url('../fonts/tg-siloka-sundanesse/TGSilokaSundanese-Bold.otf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+html,
+body {
+  @apply bg-stone-100 dark:bg-slate-800 text-stone-800 dark:text-slate-200;
+}
 
 html.has-scroll-smooth {
   @apply overflow-hidden;

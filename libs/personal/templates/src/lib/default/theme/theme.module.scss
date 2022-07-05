@@ -1,0 +1,12 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply hidden;
+  @apply hidden md:flex items-center justify-end;
+  @apply md:h-[147px] lg:h-[211px];
+  @apply max-w-[1900px] mx-auto px-6 md:px-32 lg:px-52;
+
+  .button {
+    @apply text-xl font-semibold capitalize;
+    @apply px-4;
+  }
+}

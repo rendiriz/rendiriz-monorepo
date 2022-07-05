@@ -1,0 +1,16 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply flex items-center justify-center fixed w-full h-full pointer-events-none z-[100];
+
+  .background {
+    @apply absolute bg-stone-200 dark:bg-slate-900 w-full top-0 left-0 z-[101];
+  }
+
+  .text {
+    @apply font-serif text-4xl z-[102];
+
+    .letter {
+      @apply inline-block tracking-wider;
+    }
+  }
+}

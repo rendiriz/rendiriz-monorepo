@@ -1,0 +1,8 @@
+{
+  "extends": ["../../../.eslintrc.next.json"],
+  "parserOptions": {
+    "createDefaultProgram": true,
+    "tsconfigRootDir": "./libs/personal/constants",
+    "project": "./tsconfig.json"
+  }
+}

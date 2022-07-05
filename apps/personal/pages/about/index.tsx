@@ -4,9 +4,8 @@ import classNames from 'classnames';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { DefaultContainer } from '@rendiriz-ecosystem/personal/templates';
 import { Logo, Theme } from '@rendiriz-ecosystem/personal/templates';
-import { Hero } from '@rendiriz-ecosystem/personal/components';
 
-export function Home() {
+export function About() {
   const main = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -39,14 +38,14 @@ export function Home() {
         className={classNames('content', 'w-full overflow-hidden opacity-100')}
       >
         <Theme theme={theme} setTheme={setTheme} />
-        <Hero />
+        <div>asd</div>
       </main>
     </>
   );
 }
 
-Home.Layout = function getLayout(page) {
+About.Layout = function getLayout(page) {
   return <DefaultContainer>{page}</DefaultContainer>;
 };
 
-export default Home;
+export default About;
