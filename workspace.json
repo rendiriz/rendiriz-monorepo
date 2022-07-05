@@ -7,6 +7,7 @@
     "personal-constants": "libs/personal/constants",
     "personal-e2e": "apps/personal-e2e",
     "personal-hooks": "libs/personal/hooks",
-    "personal-templates": "libs/personal/templates"
+    "personal-templates": "libs/personal/templates",
+    "personal-utils": "libs/personal/utils"
   }
 }

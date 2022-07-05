@@ -26,7 +26,8 @@
       ],
       "@rendiriz-ecosystem/personal/templates": [
         "libs/personal/templates/src/index.ts"
-      ]
+      ],
+      "@rendiriz-ecosystem/personal/utils": ["libs/personal/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
