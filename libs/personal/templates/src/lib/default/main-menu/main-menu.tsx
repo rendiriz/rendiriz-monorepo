@@ -1,145 +1,92 @@
-import { useCallback } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
-import { gsap } from 'gsap';
-import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import styles from './main-menu.module.scss';
 
 export function MainMenu() {
-  const handleMenuEnter = useCallback((event: any) => {
-    gsap.to(event.target, {
-      backgroundColor: 'white',
-    });
-  }, []);
-
-  const handleMenuLeave = useCallback((event: any) => {
-    gsap.to(event.target, {
-      backgroundColor: 'transparent',
-    });
-  }, []);
-
-  useIsomorphicLayoutEffect(() => {
-    const activeMenus = document.querySelectorAll('.menu-hover');
-
-    [].forEach.call(activeMenus, (activeMenu: any) => {
-      activeMenu.addEventListener('mouseenter', handleMenuEnter);
-      activeMenu.addEventListener('mouseleave', handleMenuLeave);
-    });
-  }, []);
-
   return (
-    <div
-      className={classNames(
-        styles.main,
-        'main-menu',
-        'w-full h-full fixed top-0 left-0 z-[9] pointer-events-none invisible overflow-hidden',
-      )}
-    >
-      <div
-        className={classNames(
-          'main-menu-background',
-          'bg-stone-200 dark:bg-slate-900 absolute w-0 h-full top-0 right-0',
-        )}
-      />
+    <div className={classNames(styles.main)}>
+      <div className={classNames(styles.background)} />
       <div className={classNames('absolute w-full h-full top-0 left-0')}>
         <div
           className={classNames(
             'absolute flex flex-col items-center justify-center left-0 w-full h-full',
           )}
         >
-          <ul
-            className={classNames(
-              styles.listPrimary,
-              'list-primary',
-              'w-full text-center',
-            )}
-          >
-            <li>
+          <ul className={classNames(styles.listPrimary)}>
+            <li className={classNames(styles.itemPrimary)}>
               <Link href="/work">
-                <a
-                  className={classNames(
-                    'link-hover',
-                    'font-serif text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
-                    'text-stone-800',
-                    'dark:text-slate-200',
-                  )}
-                >
-                  WORK
+                <a className={classNames(styles.linkPrimary, 'link-hover')}>
+                  {'WORK'.split('').map((letter: string, i: number) => (
+                    <span key={i} className={classNames(styles.letterPrimary)}>
+                      {letter}
+                    </span>
+                  ))}
                 </a>
               </Link>
             </li>
-            <li>
+            <li className={classNames(styles.itemPrimary)}>
               <Link href="/about">
-                <a
-                  className={classNames(
-                    'link-hover',
-                    'font-serif text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
-                    'text-stone-800',
-                    'dark:text-slate-200',
-                  )}
-                >
-                  ABOUT
+                <a className={classNames(styles.linkPrimary, 'link-hover')}>
+                  {'ABOUT'.split('').map((letter: string, i: number) => (
+                    <span key={i} className={classNames(styles.letterPrimary)}>
+                      {letter}
+                    </span>
+                  ))}
                 </a>
               </Link>
             </li>
-            <li>
+            <li className={classNames(styles.itemPrimary)}>
               <Link href="/blog">
-                <a
-                  className={classNames(
-                    'link-hover',
-                    'font-serif text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
-                    'text-stone-800',
-                    'dark:text-slate-200',
-                  )}
-                >
-                  BLOG
+                <a className={classNames(styles.linkPrimary, 'link-hover')}>
+                  {'BLOG'.split('').map((letter: string, i: number) => (
+                    <span key={i} className={classNames(styles.letterPrimary)}>
+                      {letter}
+                    </span>
+                  ))}
                 </a>
               </Link>
             </li>
           </ul>
-          <ul
-            className={classNames(
-              styles.listSecondary,
-              'list-secondary',
-              'w-full text-center mt-2',
-            )}
-          >
-            <li>
+          <ul className={classNames(styles.listSecondary)}>
+            <li className={classNames(styles.itemSecondary)}>
               <Link href="/note">
-                <a
-                  className={classNames(
-                    'link-hover',
-                    'text-stone-800',
-                    'dark:text-slate-200',
-                  )}
-                >
-                  Note
+                <a className={classNames(styles.linkSecondary, 'link-hover')}>
+                  {'Note'.split('').map((letter: string, i: number) => (
+                    <span
+                      key={i}
+                      className={classNames(styles.letterSecondary)}
+                    >
+                      {letter}
+                    </span>
+                  ))}
                 </a>
               </Link>
             </li>
-            <li>
+            <li className={classNames(styles.itemSecondary)}>
               <Link href="/bookmark">
-                <a
-                  className={classNames(
-                    'link-hover',
-                    'text-stone-800',
-                    'dark:text-slate-200',
-                  )}
-                >
-                  Bookmark
+                <a className={classNames(styles.linkSecondary, 'link-hover')}>
+                  {'Bookmark'.split('').map((letter: string, i: number) => (
+                    <span
+                      key={i}
+                      className={classNames(styles.letterSecondary)}
+                    >
+                      {letter}
+                    </span>
+                  ))}
                 </a>
               </Link>
             </li>
-            <li>
+            <li className={classNames(styles.itemSecondary)}>
               <Link href="/contact">
-                <a
-                  className={classNames(
-                    'link-hover',
-                    'text-stone-800',
-                    'dark:text-slate-200',
-                  )}
-                >
-                  Contact
+                <a className={classNames(styles.linkSecondary, 'link-hover')}>
+                  {'Contact'.split('').map((letter: string, i: number) => (
+                    <span
+                      key={i}
+                      className={classNames(styles.letterSecondary)}
+                    >
+                      {letter}
+                    </span>
+                  ))}
                 </a>
               </Link>
             </li>

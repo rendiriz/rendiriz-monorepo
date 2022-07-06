@@ -7,7 +7,11 @@ import {
   animationLoadingRouterStart,
   animationLoadingRouterlEnd,
 } from '@rendiriz-ecosystem/personal/utils';
+
+// Styles
 import styles from './loading.module.scss';
+import stylesLogo from '../logo/logo.module.scss';
+import stylesMenu from '../menu/menu.module.scss';
 
 export function Loading() {
   const router = useRouter();
@@ -37,6 +41,8 @@ export function Loading() {
       loadingBackground: styles.background,
       loadingText: styles.text,
       loadingLetter: styles.letter,
+      loadingLogoLetter: stylesLogo.letter,
+      loadingMenuLine: stylesMenu.line,
     });
 
     tl.eventCallback('onComplete', function () {
@@ -62,6 +68,8 @@ export function Loading() {
       loadingBackground: styles.background,
       loadingText: styles.text,
       loadingLetter: styles.letter,
+      loadingLogoLetter: stylesLogo.letter,
+      loadingMenuLine: stylesMenu.line,
     });
   }, []);
 

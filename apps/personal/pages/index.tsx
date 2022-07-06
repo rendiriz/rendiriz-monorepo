@@ -38,8 +38,8 @@ export function Home() {
         ref={main}
         className={classNames('content', 'w-full overflow-hidden opacity-100')}
       >
-        <Theme theme={theme} setTheme={setTheme} />
         <Hero />
+        <Theme theme={theme} setTheme={setTheme} />
       </main>
     </>
   );

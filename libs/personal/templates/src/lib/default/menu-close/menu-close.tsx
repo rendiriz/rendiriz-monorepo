@@ -1,70 +1,27 @@
 import { useCallback } from 'react';
 import classNames from 'classnames';
 import { gsap } from 'gsap';
+import { animationMenuEnd } from '@rendiriz-ecosystem/personal/utils';
+
+// Styles
 import styles from './menu-close.module.scss';
+import stylesMainMenu from '../main-menu/main-menu.module.scss';
+import stylesLogo from '../logo/logo.module.scss';
 
 export function MenuClose() {
   const handleButtonClick = useCallback(() => {
-    const activeLinks = document.querySelector(`.${styles.main}`);
-
-    activeLinks?.classList.remove(styles.mainMenu);
-
-    const logo = document.querySelector(`.logo`);
-    const content = document.querySelector(`.content`);
-    const mainMenu = document.querySelector(`.main-menu`);
-    const mainMenuBg = document.querySelector(`.main-menu-background`);
-    const mainMenuListPrimary = document.querySelector(`.list-primary`);
-    const mainMenuListSecondary = document.querySelector(`.list-secondary`);
-
-    gsap.to(logo, {
-      opacity: 0,
+    animationMenuEnd({
+      menuClose: styles.main,
+      menuCloseMainMenu: styles.mainMenu,
+      content: 'content',
+      mainMenu: stylesMainMenu.main,
+      mainMenuBackground: stylesMainMenu.background,
+      logoLetter: stylesLogo.letter,
+      mainMenuItemPrimary: stylesMainMenu.itemPrimary,
+      mainMenuLetterPrimary: stylesMainMenu.letterPrimary,
+      mainMenuItemSecondary: stylesMainMenu.itemSecondary,
+      mainMenuLetterSecondary: stylesMainMenu.letterSecondary,
     });
-
-    gsap.to(content, {
-      x: '0%',
-      duration: 0.9,
-      ease: 'power1.out',
-      opacity: 1,
-    });
-
-    gsap.to(mainMenu, {
-      pointerEvents: 'none',
-      visibility: 'hidden',
-      delay: 1.6,
-    });
-
-    gsap.to(mainMenuBg, {
-      width: '0',
-      delay: 0.8,
-      duration: 0.8,
-      ease: 'power1.out',
-    });
-
-    gsap.fromTo(
-      mainMenuListPrimary,
-      {
-        duration: 0.8,
-        opacity: 1,
-        y: 0,
-      },
-      {
-        opacity: 0,
-        y: -100,
-      },
-    );
-
-    gsap.fromTo(
-      mainMenuListSecondary,
-      {
-        duration: 0.8,
-        opacity: 1,
-        y: 0,
-      },
-      {
-        opacity: 0,
-        y: 100,
-      },
-    );
   }, []);
 
   return (

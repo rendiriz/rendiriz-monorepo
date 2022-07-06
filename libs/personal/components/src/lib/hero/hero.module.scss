@@ -1,4 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .main {
-  @apply max-w-[1900px] mx-auto px-6 md:px-16 lg:px-20 xl:px-52 py-40 md:py-6 lg:py-0;
+  @apply max-w-[1900px] mx-auto;
+  @apply px-6 md:px-16 lg:px-20 xl:px-52;
+  @apply py-[150px] lg:py-[215px];
 }

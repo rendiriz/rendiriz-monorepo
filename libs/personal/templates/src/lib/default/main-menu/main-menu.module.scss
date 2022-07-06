@@ -1,34 +1,40 @@
 /* stylelint-disable selector-class-pattern */
 .main {
+  @apply w-full h-full fixed top-0 left-0 z-[9] pointer-events-none invisible overflow-hidden;
+
+  .background {
+    @apply bg-stone-200 dark:bg-slate-900 absolute w-0 h-full top-0 right-0;
+  }
+
   .listPrimary {
-    li {
+    @apply w-full text-center;
+
+    .itemPrimary {
       @apply w-full relative m-0 py-2 md:py-3 xl:py-4;
 
-      // &::after {
-      //   content: '';
-      //   position: absolute;
-      //   bottom: 0;
-      //   top: 0;
-      //   left: 0;
-      //   right: 0;
-      //   z-index: 8;
-      //   transform: scaleY(0);
-      //   transform-origin: center top;
-      //   transition: transform .5s cubic-bezier(0.22, 0.61, 0.36, 1);
-      // }
+      .linkPrimary {
+        @apply font-serif text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-stone-800 dark:text-slate-200;
 
-      // &:hover {
-      //   &::after {
-      //     transform: scaleY(1);
-      //     transform-origin: center bottom;
-      //   }
-      // }
+        .letterPrimary {
+          @apply inline-block tracking-wider;
+        }
+      }
     }
   }
 
   .listSecondary {
-    li {
+    @apply w-full text-center mt-2;
+
+    .itemSecondary {
       @apply w-full relative m-0 py-2;
+
+      .linkSecondary {
+        @apply text-stone-800 dark:text-slate-200;
+
+        .letterSecondary {
+          @apply inline-block tracking-wider;
+        }
+      }
     }
   }
 }

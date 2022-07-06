@@ -1,2 +1,4 @@
 export const LOADING_BACKGROUND = 0.5;
 export const LOADING_LETTER = 0.1;
+
+export const LOADING_LOGO_LETTER = LOADING_BACKGROUND * 2 + 10 * LOADING_LETTER;

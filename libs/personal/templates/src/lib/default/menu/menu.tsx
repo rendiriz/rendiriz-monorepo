@@ -1,80 +1,28 @@
 import { useCallback } from 'react';
 import classNames from 'classnames';
 import { gsap } from 'gsap';
+import { animationMenuStart } from '@rendiriz-ecosystem/personal/utils';
+
+// Styles
 import styles from './menu.module.scss';
+import stylesMainMenu from '../main-menu/main-menu.module.scss';
 import stylesMenuClose from '../menu-close/menu-close.module.scss';
+import stylesLogo from '../logo/logo.module.scss';
 
 export function Menu() {
   const handleButtonClick = useCallback(() => {
-    const activeLinks = document.querySelector(`.${stylesMenuClose.main}`);
-    const mouseoverEvent = new Event('mouseenter');
-
-    activeLinks?.dispatchEvent(mouseoverEvent);
-    activeLinks?.classList.add(stylesMenuClose.mainMenu);
-
-    const logo = document.querySelector(`.logo`);
-    const content = document.querySelector(`.content`);
-    const mainMenu = document.querySelector(`.main-menu`);
-    const mainMenuBg = document.querySelector(`.main-menu-background`);
-    const mainMenuListPrimary = document.querySelector(`.list-primary`);
-    const mainMenuListSecondary = document.querySelector(`.list-secondary`);
-
-    gsap.to(logo, {
-      delay: 0.9,
-      opacity: 1,
+    animationMenuStart({
+      menuClose: stylesMenuClose.main,
+      menuCloseMainMenu: stylesMenuClose.mainMenu,
+      content: 'content',
+      mainMenu: stylesMainMenu.main,
+      mainMenuBackground: stylesMainMenu.background,
+      logoLetter: stylesLogo.letter,
+      mainMenuItemPrimary: stylesMainMenu.itemPrimary,
+      mainMenuLetterPrimary: stylesMainMenu.letterPrimary,
+      mainMenuItemSecondary: stylesMainMenu.itemSecondary,
+      mainMenuLetterSecondary: stylesMainMenu.letterSecondary,
     });
-
-    gsap.from(content, {
-      width: '100%',
-      overflow: 'hidden',
-      opacity: 1,
-    });
-
-    gsap.to(content, {
-      x: '-100%',
-      overflow: 'hidden',
-      duration: 0.9,
-      ease: 'power1.in',
-      opacity: 0,
-    });
-
-    gsap.to(mainMenu, {
-      pointerEvents: 'auto',
-      visibility: 'visible',
-      duration: 0.8,
-    });
-
-    gsap.to(mainMenuBg, {
-      width: '100%',
-      duration: 0.8,
-      ease: 'power1.in',
-    });
-
-    gsap.fromTo(
-      mainMenuListPrimary,
-      {
-        opacity: 0,
-        y: -100,
-      },
-      {
-        delay: 0.8,
-        opacity: 1,
-        y: 0,
-      },
-    );
-
-    gsap.fromTo(
-      mainMenuListSecondary,
-      {
-        opacity: 0,
-        y: 100,
-      },
-      {
-        delay: 0.8,
-        opacity: 1,
-        y: 0,
-      },
-    );
   }, []);
 
   return (
@@ -124,44 +72,13 @@ export function Menu() {
       </div>
       <button
         type="button"
-        className={classNames(
-          styles.button,
-          'bg-stone-100',
-          'dark:bg-slate-800',
-        )}
+        className={classNames(styles.button)}
         onClick={handleButtonClick}
       >
         <div className={classNames(styles.box)}>
-          <div
-            className={classNames(
-              styles.line,
-              styles.first,
-              'before:bg-stone-800',
-              'after:bg-stone-800',
-              'dark:before:bg-slate-200',
-              'dark:after:bg-slate-200',
-            )}
-          />
-          <div
-            className={classNames(
-              styles.line,
-              styles.second,
-              'before:bg-stone-800',
-              'after:bg-stone-800',
-              'dark:before:bg-slate-200',
-              'dark:after:bg-slate-200',
-            )}
-          />
-          <div
-            className={classNames(
-              styles.line,
-              styles.third,
-              'before:bg-stone-800',
-              'after:bg-stone-800',
-              'dark:before:bg-slate-200',
-              'dark:after:bg-slate-200',
-            )}
-          />
+          <div className={classNames(styles.line, styles.first)} />
+          <div className={classNames(styles.line, styles.second)} />
+          <div className={classNames(styles.line, styles.third)} />
         </div>
       </button>
     </nav>
