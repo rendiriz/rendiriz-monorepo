@@ -5,6 +5,7 @@
     "personal": "apps/personal",
     "personal-components": "libs/personal/components",
     "personal-constants": "libs/personal/constants",
+    "personal-contexts": "libs/personal/contexts",
     "personal-e2e": "apps/personal-e2e",
     "personal-hooks": "libs/personal/hooks",
     "personal-templates": "libs/personal/templates",

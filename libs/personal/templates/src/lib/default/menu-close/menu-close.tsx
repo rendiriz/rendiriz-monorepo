@@ -1,17 +1,28 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { gsap } from 'gsap';
 import { animationMenuEnd } from '@rendiriz-ecosystem/personal/utils';
+import { useTimelineMenu } from '@rendiriz-ecosystem/personal/contexts';
 
 // Styles
 import styles from './menu-close.module.scss';
+import stylesMenu from '../menu/menu.module.scss';
 import stylesMainMenu from '../main-menu/main-menu.module.scss';
 import stylesLogo from '../logo/logo.module.scss';
 
 export function MenuClose() {
+  const router = useRouter();
+  const { timelineStart, handleTimelineEnd } = useTimelineMenu();
+
   const handleButtonClick = useCallback(() => {
-    animationMenuEnd({
+    if (timelineStart) {
+      timelineStart.kill();
+    }
+
+    const tl = animationMenuEnd({
+      menuButton: stylesMenu.button,
       menuClose: styles.main,
+      menuCloseButton: styles.button,
       menuCloseMainMenu: styles.mainMenu,
       content: 'content',
       mainMenu: stylesMainMenu.main,
@@ -22,7 +33,17 @@ export function MenuClose() {
       mainMenuItemSecondary: stylesMainMenu.itemSecondary,
       mainMenuLetterSecondary: stylesMainMenu.letterSecondary,
     });
-  }, []);
+
+    handleTimelineEnd(tl);
+  }, [timelineStart, handleTimelineEnd]);
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', handleButtonClick);
+
+    return () => {
+      router.events.off('routeChangeStart', handleButtonClick);
+    };
+  }, [router]);
 
   return (
     <nav className={classNames(styles.main, 'link-hover')}>
@@ -74,30 +95,12 @@ export function MenuClose() {
       </div>
       <button
         type="button"
-        className={classNames(
-          styles.button,
-          'bg-stone-100',
-          'dark:bg-slate-800',
-        )}
+        className={classNames(styles.button)}
         onClick={handleButtonClick}
       >
         <div className={classNames(styles.box)}>
-          <div
-            className={classNames(
-              styles.line,
-              styles.first,
-              'bg-stone-800',
-              'dark:bg-slate-200',
-            )}
-          />
-          <div
-            className={classNames(
-              styles.line,
-              styles.second,
-              'bg-stone-800',
-              'dark:bg-slate-200',
-            )}
-          />
+          <div className={classNames(styles.line, styles.first)} />
+          <div className={classNames(styles.line, styles.second)} />
         </div>
       </button>
     </nav>

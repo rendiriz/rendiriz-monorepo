@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import classNames from 'classnames';
-import { gsap } from 'gsap';
 import { animationMenuStart } from '@rendiriz-ecosystem/personal/utils';
+import { useTimelineMenu } from '@rendiriz-ecosystem/personal/contexts';
 
 // Styles
 import styles from './menu.module.scss';
@@ -10,9 +10,17 @@ import stylesMenuClose from '../menu-close/menu-close.module.scss';
 import stylesLogo from '../logo/logo.module.scss';
 
 export function Menu() {
+  const { timelineEnd, handleTimelineStart } = useTimelineMenu();
+
   const handleButtonClick = useCallback(() => {
-    animationMenuStart({
+    if (timelineEnd) {
+      timelineEnd.kill();
+    }
+
+    const tl = animationMenuStart({
+      menuButton: styles.button,
       menuClose: stylesMenuClose.main,
+      menuCloseButton: stylesMenuClose.button,
       menuCloseMainMenu: stylesMenuClose.mainMenu,
       content: 'content',
       mainMenu: stylesMainMenu.main,
@@ -23,7 +31,9 @@ export function Menu() {
       mainMenuItemSecondary: stylesMainMenu.itemSecondary,
       mainMenuLetterSecondary: stylesMainMenu.letterSecondary,
     });
-  }, []);
+
+    handleTimelineStart(tl);
+  }, [timelineEnd, handleTimelineStart]);
 
   return (
     <nav className={classNames(styles.main, 'link-hover')}>

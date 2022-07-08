@@ -70,3 +70,15 @@ html.has-scroll-dragging {
   @apply absolute top-0 right-0 w-[7px] rounded-xl m-[2px];
   @apply bg-stone-800 dark:bg-slate-200;
 }
+
+.background-transparent {
+  @apply bg-transparent #{!important};
+}
+
+.opacity-zero {
+  @apply opacity-0 #{!important};
+}
+
+.opacity-one {
+  @apply opacity-100 #{!important};
+}

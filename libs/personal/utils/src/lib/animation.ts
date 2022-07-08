@@ -252,7 +252,9 @@ export const animationLoadingRouterlEnd = ({
 };
 
 export const animationMenuStart = ({
+  menuButton,
   menuClose,
+  menuCloseButton,
   menuCloseMainMenu,
   content,
   mainMenu,
@@ -263,7 +265,9 @@ export const animationMenuStart = ({
   mainMenuItemSecondary,
   mainMenuLetterSecondary,
 }: any) => {
+  const menuButtonSel = getSel(menuButton);
   const menuCloseSel = getSel(menuClose);
+  const menuCloseButtonSel = getSel(menuCloseButton);
   const contentSel = getSel(content);
   const mainMenuSel = getSel(mainMenu);
   const mainMenuBackgroundSel = getSel(mainMenuBackground);
@@ -271,11 +275,24 @@ export const animationMenuStart = ({
   const mainMenuItemPrimarySel = getSelAll(mainMenuItemPrimary);
   const mainMenuItemSecondarySel = getSelAll(mainMenuItemSecondary);
 
+  // (menuCloseButtonSel as HTMLElement).style.background = 'transparent';
+  // (menuButtonSel as HTMLElement).style.background = 'transparent';
+
   const mouseoverEvent = new Event('mouseenter');
   menuCloseSel?.dispatchEvent(mouseoverEvent);
   menuCloseSel?.classList.add(menuCloseMainMenu);
 
   const tl = gsap.timeline();
+
+  const menuButtonAni = gsap.fromTo(
+    menuButtonSel,
+    {
+      opacity: 1,
+    },
+    {
+      opacity: 0,
+    },
+  );
 
   const contentAni = gsap.fromTo(
     contentSel,
@@ -305,7 +322,7 @@ export const animationMenuStart = ({
     ease: 'power1.in',
   });
 
-  tl.add([contentAni, mainMenuAni, mainMenuBackgroundAni], '<');
+  tl.add([menuButtonAni, contentAni, mainMenuAni, mainMenuBackgroundAni], '<');
 
   const logoLetterAni = gsap.fromTo(
     logoLetterSel,
@@ -357,10 +374,19 @@ export const animationMenuStart = ({
   });
 
   tl.add([logoLetterAni, ...primaryAni, ...secondaryAni], '>');
+
+  // tl.eventCallback('onComplete', function () {
+  //   (menuCloseButtonSel as HTMLElement).style.pointerEvents = 'auto';
+  //   (menuButtonSel as HTMLElement).style.pointerEvents = 'none';
+  // });
+
+  return tl;
 };
 
 export const animationMenuEnd = ({
+  menuButton,
   menuClose,
+  menuCloseButton,
   menuCloseMainMenu,
   content,
   mainMenu,
@@ -371,7 +397,9 @@ export const animationMenuEnd = ({
   mainMenuItemSecondary,
   mainMenuLetterSecondary,
 }: any) => {
+  const menuButtonSel = getSel(menuButton);
   const menuCloseSel = getSel(menuClose);
+  const menuCloseButtonSel = getSel(menuCloseButton);
   const contentSel = getSel(content);
   const mainMenuSel = getSel(mainMenu);
   const mainMenuBackgroundSel = getSel(mainMenuBackground);
@@ -382,6 +410,16 @@ export const animationMenuEnd = ({
   menuCloseSel?.classList.remove(menuCloseMainMenu);
 
   const tl = gsap.timeline();
+
+  const menuButtonAni = gsap.fromTo(
+    menuButtonSel,
+    {
+      opacity: 0,
+    },
+    {
+      opacity: 1,
+    },
+  );
 
   const primary = Array.from(mainMenuItemPrimarySel).map((item: any) => {
     return [].slice
@@ -425,7 +463,7 @@ export const animationMenuEnd = ({
     );
   });
 
-  tl.add([...primaryAni, ...secondaryAni], '<');
+  tl.add([menuButtonAni, ...primaryAni, ...secondaryAni], '<');
 
   const contentAni = gsap.to(contentSel, {
     x: '0%',
@@ -460,4 +498,13 @@ export const animationMenuEnd = ({
     pointerEvents: 'none',
     visibility: 'hidden',
   });
+
+  // tl.eventCallback('onComplete', function () {
+  //   (menuCloseButtonSel as HTMLElement).style.background = '';
+  //   (menuCloseButtonSel as HTMLElement).style.pointerEvents = 'none';
+  //   (menuButtonSel as HTMLElement).style.background = '';
+  //   (menuButtonSel as HTMLElement).style.pointerEvents = 'auto';
+  // });
+
+  return tl;
 };

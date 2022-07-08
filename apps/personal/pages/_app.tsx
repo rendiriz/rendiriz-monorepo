@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import './styles.scss';
 
 import { ThemeProvider } from 'next-themes';
+import { TimelineMenuProvider } from '@rendiriz-ecosystem/personal/contexts';
 
 interface AppWithLayout extends AppProps {
   Component: NextComponentType & { Layout: ComponentType };
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }: AppWithLayout) {
 
   return (
     <ThemeProvider attribute="class">
-      {getLayout(<Component {...pageProps} />)}
+      <TimelineMenuProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </TimelineMenuProvider>
     </ThemeProvider>
   );
 }
