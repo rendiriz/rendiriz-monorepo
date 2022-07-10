@@ -3,7 +3,8 @@ import { useTheme } from 'next-themes';
 import classNames from 'classnames';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { DefaultContainer } from '@rendiriz-ecosystem/personal/templates';
-import { Logo, Theme } from '@rendiriz-ecosystem/personal/templates';
+import { Footer } from '@rendiriz-ecosystem/personal/templates';
+import { Example, AboutContact } from '@rendiriz-ecosystem/personal/components';
 
 export function About() {
   const main = useRef<HTMLInputElement>(null);
@@ -37,8 +38,13 @@ export function About() {
         ref={main}
         className={classNames('content', 'w-full overflow-hidden opacity-100')}
       >
-        <Theme theme={theme} setTheme={setTheme} />
-        <div>asd</div>
+        <section
+          data-scroll-section
+          className={classNames('h-[200px] lg:h-[250px]')}
+        />
+        <Example />
+        <AboutContact />
+        <Footer theme={theme} setTheme={setTheme} />
       </main>
     </>
   );

@@ -19,6 +19,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         serif: ['Marcellus', ...defaultTheme.fontFamily.serif],
+        mono: ['Roboto Mono', ...defaultTheme.fontFamily.mono],
         sundanesse: ['TG Siloka Sundanesse'],
       },
     },

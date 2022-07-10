@@ -1,0 +1,46 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply text-stone-200 bg-stone-800 dark:text-slate-800 dark:bg-slate-200;
+  @apply py-12 px-6 lg:px-20;
+  @apply border-stone-800 dark:border-slate-200;
+
+  .link {
+    @apply hover:underline;
+  }
+
+  .themeInformation {
+    @apply flex flex-col-reverse lg:flex-row items-start lg:items-end justify-between gap-8;
+    @apply mb-8;
+
+    .copyEmail {
+      @apply font-mono text-[10px] mb-2;
+    }
+
+    .email {
+      @apply text-lg font-bold hover:underline;
+    }
+  }
+
+  .copyrightSocial {
+    @apply flex flex-col-reverse lg:flex-row items-start lg:items-center justify-between gap-4;
+    @apply font-mono text-xs;
+
+    .social {
+      .list {
+        @apply flex;
+
+        .item {
+          @apply mx-3;
+
+          &:first-child {
+            @apply ml-0;
+          }
+
+          &:last-child {
+            @apply mr-0;
+          }
+        }
+      }
+    }
+  }
+}

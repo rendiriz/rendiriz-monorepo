@@ -4,6 +4,7 @@ import { Logo } from '../logo/logo';
 import { Menu } from '../menu/menu';
 import { MenuClose } from '../menu-close/menu-close';
 import { MainMenu } from '../main-menu/main-menu';
+import { Footer } from '../footer/footer';
 
 export interface DefaultContainerProps {
   children: React.ReactNode;

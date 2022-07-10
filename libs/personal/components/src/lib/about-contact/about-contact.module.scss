@@ -1,0 +1,23 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply bg-stone-800 dark:bg-slate-200 text-stone-200 dark:text-slate-800;
+  @apply border-stone-800 dark:border-slate-200;
+
+  .contact {
+    @apply flex items-center justify-center;
+    @apply h-[calc(100vh-284px)] lg:h-[calc(100vh-196px)];
+    @apply pt-[174px] lg:pt-[196px];
+
+    .link {
+      @apply flex items-center justify-center w-full h-full;
+
+      .title {
+        @apply font-serif text-center text-3xl lg:text-4xl xl:text-5xl;
+      }
+
+      .letter {
+        @apply inline-block opacity-0;
+      }
+    }
+  }
+}

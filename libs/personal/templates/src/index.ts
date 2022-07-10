@@ -11,3 +11,4 @@ export * from './lib/default/main-menu/main-menu';
 export * from './lib/default/menu/menu';
 export * from './lib/default/menu-close/menu-close';
 export * from './lib/default/theme/theme';
+export * from './lib/default/footer/footer';

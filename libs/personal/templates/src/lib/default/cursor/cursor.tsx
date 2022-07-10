@@ -1,9 +1,11 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import styles from './cursor.module.scss';
 
 export function Cursor() {
+  const router = useRouter();
   const cursor = useRef<HTMLInputElement>(null);
 
   const handleMouseMove = useCallback((event: MouseEvent) => {
@@ -25,77 +27,53 @@ export function Cursor() {
     }
   }, []);
 
-  // const handleMenuWorkEnter = useCallback(() => {
-  //   if (cursor.current) {
-  //     cursor.current.classList.add(styles.menuWorkHover);
-  //   }
-  // }, []);
+  const handleLinkContactEnter = useCallback(() => {
+    if (cursor.current) {
+      cursor.current.classList.add(styles.linkHoverContact);
+    }
+  }, []);
 
-  // const handleMenuWorkLeave = useCallback(() => {
-  //   if (cursor.current) {
-  //     cursor.current.classList.remove(styles.menuWorkHover);
-  //   }
-  // }, []);
+  const handleLinkContactLeave = useCallback(() => {
+    if (cursor.current) {
+      cursor.current.classList.remove(styles.linkHoverContact);
+    }
+  }, []);
 
-  // const handleMenuAboutEnter = useCallback(() => {
-  //   if (cursor.current) {
-  //     cursor.current.classList.add(styles.menuAboutHover);
-  //   }
-  // }, []);
+  const handleLinkEnterLeave = useCallback(() => {
+    setTimeout(() => {
+      const activeLinks = document.querySelectorAll('.link-hover');
+      [].forEach.call(activeLinks, (activeLink: any) => {
+        activeLink.addEventListener('mouseenter', handleLinkEnter);
+        activeLink.addEventListener('mouseleave', handleLinkLeave);
+      });
 
-  // const handleMenuAboutLeave = useCallback(() => {
-  //   if (cursor.current) {
-  //     cursor.current.classList.remove(styles.menuAboutHover);
-  //   }
-  // }, []);
-
-  // const handleMenuBlogEnter = useCallback(() => {
-  //   if (cursor.current) {
-  //     cursor.current.classList.add(styles.menuBlogHover);
-  //   }
-  // }, []);
-
-  // const handleMenuBlogLeave = useCallback(() => {
-  //   if (cursor.current) {
-  //     cursor.current.classList.remove(styles.menuBlogHover);
-  //   }
-  // }, []);
+      const contacts = document.querySelectorAll('.link-hover-contact');
+      [].forEach.call(contacts, (contact: any) => {
+        contact.addEventListener('mouseenter', handleLinkContactEnter);
+        contact.addEventListener('mouseleave', handleLinkContactLeave);
+      });
+    }, 3000);
+  }, []);
 
   useIsomorphicLayoutEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
 
-    const activeLinks = document.querySelectorAll('.link-hover');
-    [].forEach.call(activeLinks, (activeLink: any) => {
-      activeLink.addEventListener('mouseenter', handleLinkEnter);
-      activeLink.addEventListener('mouseleave', handleLinkLeave);
-    });
-
-    // const activeMenuWorks = document.querySelectorAll('.menu-work-hover');
-    // [].forEach.call(activeMenuWorks, (activeMenu: any) => {
-    //   activeMenu.addEventListener('mouseenter', handleMenuWorkEnter);
-    //   activeMenu.addEventListener('mouseleave', handleMenuWorkLeave);
-    // });
-
-    // const activeMenuAbouts = document.querySelectorAll('.menu-about-hover');
-    // [].forEach.call(activeMenuAbouts, (activeMenu: any) => {
-    //   activeMenu.addEventListener('mouseenter', handleMenuAboutEnter);
-    //   activeMenu.addEventListener('mouseleave', handleMenuAboutLeave);
-    // });
-
-    // const activeMenuBlogs = document.querySelectorAll('.menu-blog-hover');
-    // [].forEach.call(activeMenuBlogs, (activeMenu: any) => {
-    //   activeMenu.addEventListener('mouseenter', handleMenuBlogEnter);
-    //   activeMenu.addEventListener('mouseleave', handleMenuBlogLeave);
-    // });
+    handleLinkEnterLeave();
 
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    router.events.on('routeChangeStart', handleLinkEnterLeave);
+
+    return () => {
+      router.events.off('routeChangeStart', handleLinkEnterLeave);
+    };
+  }, [router]);
+
   return (
     <div ref={cursor} className={styles.main}>
-      <span className={styles.work}>Work</span>
-      <span className={styles.about}>About</span>
-      <span className={styles.blog}>Blog</span>
+      <span className={styles.contact}>Contact</span>
     </div>
   );
 }
