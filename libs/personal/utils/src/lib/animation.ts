@@ -14,12 +14,12 @@ export const getSelAll = (className: string) => {
 
 export const animationLoadingInitialStart = ({
   loadingBackground,
-  loadingText,
-  loadingLetter,
+  loadingLogo,
+  loadingLogoLetter,
 }: any) => {
   const loadingBackgroundSel = getSel(loadingBackground);
-  const loadingTextSel = getSel(loadingText);
-  const loadingLetterSel = getSelAll(loadingLetter);
+  const loadingLogoSel = getSel(loadingLogo);
+  const loadingLogoLetterSel = getSelAll(loadingLogoLetter);
 
   const tl = gsap.timeline();
   tl.fromTo(
@@ -34,65 +34,34 @@ export const animationLoadingInitialStart = ({
     },
   );
   tl.fromTo(
-    loadingTextSel,
+    loadingLogoLetterSel,
     {
       opacity: 0,
+      y: 100,
     },
     {
       opacity: 1,
-    },
-  );
-  tl.fromTo(
-    loadingLetterSel,
-    {
-      opacity: 0,
-      y: 50,
-    },
-    {
-      opacity: 1,
-      stagger: LOADING_LETTER,
+      stagger: 0.2,
       y: 0,
+      top: 0,
     },
   );
+  tl.to(loadingLogoSel, {
+    duration: 1,
+    top: 0,
+  });
 
   return tl;
 };
 
 export const animationLoadingInitialEnd = ({
   loadingBackground,
-  loadingText,
-  loadingLetter,
-  loadingLogoLetter,
   loadingMenuLine,
 }: any) => {
   const loadingBackgroundSel = getSel(loadingBackground);
-  const loadingTextSel = getSel(loadingText);
-  const loadingLetterSel = getSelAll(loadingLetter);
-  const loadingLogoLetterSel = getSelAll(loadingLogoLetter);
   const loadingMenuLineSel = getSelAll(loadingMenuLine);
 
   const tl = gsap.timeline();
-  tl.fromTo(
-    loadingLetterSel,
-    {
-      opacity: 1,
-      y: 0,
-    },
-    {
-      opacity: 0,
-      stagger: LOADING_LETTER,
-      y: -50,
-    },
-  );
-  tl.fromTo(
-    loadingTextSel,
-    {
-      opacity: 1,
-    },
-    {
-      opacity: 0,
-    },
-  );
   tl.fromTo(
     loadingBackgroundSel,
     {
@@ -100,22 +69,10 @@ export const animationLoadingInitialEnd = ({
     },
     {
       height: '0%',
-      duration: LOADING_BACKGROUND,
+      duration: LOADING_BACKGROUND + 1,
     },
   );
 
-  const logoLetter = gsap.fromTo(
-    loadingLogoLetterSel,
-    {
-      opacity: 0,
-      y: 50,
-    },
-    {
-      opacity: 1,
-      stagger: LOADING_LETTER,
-      y: 0,
-    },
-  );
   const MenuLine = gsap.fromTo(
     loadingMenuLineSel,
     {
@@ -127,7 +84,7 @@ export const animationLoadingInitialEnd = ({
     },
   );
 
-  tl.add([logoLetter, MenuLine], '>');
+  tl.add([MenuLine], '>');
 
   return tl;
 };
@@ -227,7 +184,7 @@ export const animationLoadingRouterlEnd = ({
     loadingLogoLetterSel,
     {
       opacity: 0,
-      y: 50,
+      y: 100,
     },
     {
       opacity: 1,

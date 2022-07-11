@@ -13,9 +13,9 @@ export interface DefaultContainerProps {
 export function DefaultContainer({ children }: DefaultContainerProps) {
   return (
     <>
-      <Loading />
       <Cursor />
       <Logo />
+      <Loading />
       <MenuClose />
       <Menu />
       <MainMenu />

@@ -1,6 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .main {
-  @apply z-10 fixed top-0 right-auto bottom-auto mix-blend-exclusion;
+  @apply z-[200] fixed top-[calc(50%-83px)] right-auto bottom-auto mix-blend-exclusion;
   @apply left-0 px-6 lg:pl-20 py-8 lg:py-16;
 
   .link {

@@ -1,0 +1,32 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply h-[513px] md:h-[960px] lg:h-[526px] xl:h-[635px];
+
+  width: 100%;
+  z-index: 10;
+
+  .tile {
+    flex: 0 0 auto;
+
+    .tileFigure {
+      margin: 0;
+      padding: 0;
+
+      .tileImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+}
+
+.canvas {
+  @apply absolute h-[513px] md:h-[960px] lg:h-[526px] xl:h-[635px];
+
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+}

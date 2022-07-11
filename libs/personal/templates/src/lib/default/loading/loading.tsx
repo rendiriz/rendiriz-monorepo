@@ -24,8 +24,8 @@ export function Loading() {
 
     const tl = animationLoadingInitialStart({
       loadingBackground: styles.background,
-      loadingText: styles.text,
-      loadingLetter: styles.letter,
+      loadingLogo: stylesLogo.main,
+      loadingLogoLetter: stylesLogo.letter,
     });
 
     tl.eventCallback('onComplete', function () {
@@ -39,9 +39,6 @@ export function Loading() {
 
     const tl = animationLoadingInitialEnd({
       loadingBackground: styles.background,
-      loadingText: styles.text,
-      loadingLetter: styles.letter,
-      loadingLogoLetter: stylesLogo.letter,
       loadingMenuLine: stylesMenu.line,
     });
 

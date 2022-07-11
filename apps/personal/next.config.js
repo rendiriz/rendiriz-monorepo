@@ -13,6 +13,11 @@ const nextConfig = {
     svgr: false,
   },
   webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(glsl|vs|fs|vert|frag)$/,
+      use: ['raw-loader', 'glslify-loader'],
+    });
+
     // Find the base rule that contains nested rules (which contains css-loader)
     const rules = config.module.rules.find((r) => !!r.oneOf);
 
@@ -51,6 +56,9 @@ const nextConfig = {
     });
 
     return config;
+  },
+  images: {
+    domains: ['unsplash.it', 'placehold.co'],
   },
 };
 
