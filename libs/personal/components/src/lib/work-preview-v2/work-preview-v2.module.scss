@@ -1,0 +1,92 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply mb-[150px] lg:mb-[200px];
+
+  .list {
+    @apply relative flex flex-col justify-center w-screen;
+
+    .item {
+      @apply cursor-default relative overflow-hidden text-center;
+      @apply shadow-[0_-1px] shadow-stone-300 dark:shadow-slate-700;
+
+      &:last-child {
+        @apply shadow-[0_1px,0_-1px] shadow-stone-300 dark:shadow-slate-700;
+      }
+
+      .link,
+      .marquee span {
+        @apply font-serif text-2xl lg:text-4xl xl:text-5xl;
+        @apply px-6 lg:px-[1vw];
+        @apply py-[1vh];
+
+        white-space: nowrap;
+        line-height: 1.2;
+      }
+
+      .link {
+        @apply truncate;
+
+        display: block;
+        position: relative;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:focus,
+        :focus-visible {
+          color: #775e41;
+        }
+
+        &:focus:not(:focus-visible) {
+          color: #000;
+        }
+      }
+
+      .marquee {
+        @apply bg-stone-800 dark:bg-slate-200;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        transform: translate3d(0, 101%, 0);
+
+        .marqueeInnerWrap {
+          height: 100%;
+          width: 100%;
+          transform: translate3d(0, -101%, 0);
+
+          .marqueeInner {
+            height: 100%;
+            width: fit-content;
+            align-items: center;
+            display: flex;
+            position: relative;
+            animation: marquee 15s linear infinite;
+            will-change: transform;
+          }
+        }
+      }
+
+      .marquee span {
+        @apply text-stone-200 dark:text-slate-800 text-center;
+      }
+
+      .marqueeImage {
+        width: 1vw;
+        height: 70%;
+        margin: 0 2vw;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      @keyframes marquee {
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+    }
+  }
+}

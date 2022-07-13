@@ -52,7 +52,7 @@ export function AboutContent() {
               I write code, think about data, and create digital experiences.
             </div>
             <div className={classNames('mb-4')}>
-              I&apos;ve been studying web development for 10+ years and business
+              I&apos;ve been studying web development for 6+ years and business
               intelligence for 2+ years. Currently working with a super team at
               Jabar Digital Service in Bandung, Indonesia.
             </div>
