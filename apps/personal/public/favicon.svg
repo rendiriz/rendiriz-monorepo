@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    #box { fill: #292524 }
+    @media (prefers-color-scheme: dark) {
+      #box { fill: #E2E8F0 }
+    }
+  </style>
+  <g id="favicon">
+    <path id="box" d="M0 66C0 57.1634 7.16344 50 16 50H50V100H0V66Z"/>
+    <path id="box" d="M100 0L100 50L66 50C57.1634 50 50 42.8366 50 34L50 -2.18557e-06L100 0Z"/>
+    <path id="box" d="M0 0H34C42.8366 0 50 7.16344 50 16V50H0V0Z"/>
+  </g>
+</svg>

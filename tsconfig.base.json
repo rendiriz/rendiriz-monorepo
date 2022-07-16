@@ -18,6 +18,9 @@
       "@rendiriz-ecosystem/personal/components": [
         "libs/personal/components/src/index.ts"
       ],
+      "@rendiriz-ecosystem/personal/config": [
+        "libs/personal/config/src/index.ts"
+      ],
       "@rendiriz-ecosystem/personal/constants": [
         "libs/personal/constants/src/index.ts"
       ],

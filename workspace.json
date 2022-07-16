@@ -4,6 +4,7 @@
   "projects": {
     "personal": "apps/personal",
     "personal-components": "libs/personal/components",
+    "personal-config": "libs/personal/config",
     "personal-constants": "libs/personal/constants",
     "personal-contexts": "libs/personal/contexts",
     "personal-e2e": "apps/personal-e2e",

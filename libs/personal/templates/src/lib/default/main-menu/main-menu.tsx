@@ -76,20 +76,6 @@ export function MainMenu() {
                 </a>
               </Link>
             </li>
-            <li className={classNames(styles.itemSecondary)}>
-              <Link href="/contact">
-                <a className={classNames(styles.linkSecondary, 'link-hover')}>
-                  {'Contact'.split('').map((letter: string, i: number) => (
-                    <span
-                      key={i}
-                      className={classNames(styles.letterSecondary)}
-                    >
-                      {letter}
-                    </span>
-                  ))}
-                </a>
-              </Link>
-            </li>
           </ul>
         </div>
       </div>

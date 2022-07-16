@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { gsap } from 'gsap';
@@ -47,18 +47,17 @@ export function WorkPreviewV2() {
     },
     {
       link: '/work',
-      title:
-        'Work Unit - West Java Ministry of Public Works and Public Housing',
+      title: 'Unit of Work - West Java Ministry of Public Works and Housing',
       background: 'bg-[#F6ED23]',
     },
     {
       link: '/work',
-      title: 'Point of Sales Ares Telur',
+      title: 'Point of Sales - Ares Telur',
       background: 'bg-[#334148]',
     },
     {
       link: '/work',
-      title: 'Enterprise Resource Planning Siomay Kering H.Ade',
+      title: 'Enterprise Resource Planning - Siomay Kering H.Ade',
       background: 'bg-[#334148]',
     },
     {
@@ -180,8 +179,8 @@ export function WorkPreviewV2() {
                 className={classNames(styles.marqueeInnerWrap)}
               >
                 <div className={classNames(styles.marqueeInner)}>
-                  {[0, 1, 2, 3, 4, 5].map(() => (
-                    <>
+                  {[0, 1, 2, 3, 4, 5].map((_, i) => (
+                    <React.Fragment key={i}>
                       <span>{item.title}</span>
                       <div
                         className={classNames(
@@ -189,7 +188,7 @@ export function WorkPreviewV2() {
                           item.background,
                         )}
                       />
-                    </>
+                    </React.Fragment>
                   ))}
                 </div>
               </div>

@@ -22,32 +22,32 @@ export function WorkPreview() {
       tags: ['React', 'Next.js', 'Chakra UI'],
     },
     {
-      title: 'Pikobar Pelaporan',
+      title: 'Pikobar Case Reporting Dashboard',
       backgroundBefore: 'before:bg-[#27ae60]',
       backgroundAfter: 'after:bg-[#27ae60]',
       image: '/pikobar-pelaporan.png',
       tags: ['Vue', 'Vuetify'],
     },
     {
-      title: 'Ekosistem Data Jabar',
+      title: 'West Java Data Ecosystem',
       backgroundBefore: 'before:bg-[#EEF6F8]',
       backgroundAfter: 'after:bg-[#EEF6F8]',
       image: '/ekosistem-data-jabar-1.png',
       tags: ['Angular', 'Bootstrap'],
     },
     {
-      title: 'Satu Data Jabar',
-      backgroundBefore: 'before:bg-[#0753a6]',
-      backgroundAfter: 'after:bg-[#0753a6]',
-      image: '/satu-data-jabar-1.png',
-      tags: ['Angular', 'Emotion', 'NgRx'],
-    },
-    {
-      title: 'Open Data Jabar',
+      title: 'West Java Open Data',
       backgroundBefore: 'before:bg-[#006430]',
       backgroundAfter: 'after:bg-[#006430]',
       image: '/open-data-jabar-1.png',
       tags: ['Angular', 'Bootstrap', 'NgRx'],
+    },
+    {
+      title: 'West Java One Data',
+      backgroundBefore: 'before:bg-[#0753a6]',
+      backgroundAfter: 'after:bg-[#0753a6]',
+      image: '/satu-data-jabar-1.png',
+      tags: ['Angular', 'Emotion', 'NgRx'],
     },
   ];
 

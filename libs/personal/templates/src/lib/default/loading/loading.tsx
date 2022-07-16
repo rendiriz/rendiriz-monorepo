@@ -20,8 +20,6 @@ export function Loading() {
   const letters = 'Loading...'.split('');
 
   const aniStartInitial = useCallback(() => {
-    console.log('Animation Start');
-
     const tl = animationLoadingInitialStart({
       loadingBackground: styles.background,
       loadingLogo: stylesLogo.main,
@@ -29,28 +27,22 @@ export function Loading() {
     });
 
     tl.eventCallback('onComplete', function () {
-      console.log('Animation Complete');
       setIsLoading(false);
     });
   }, []);
 
   const aniEndInitial = useCallback(() => {
-    console.log('Animation End');
-
     const tl = animationLoadingInitialEnd({
       loadingBackground: styles.background,
       loadingMenuLine: stylesMenu.line,
     });
 
     tl.eventCallback('onComplete', function () {
-      console.log('Animation Complete');
       setIsLoading(false);
     });
   }, []);
 
   const aniStartRouter = useCallback(() => {
-    console.log('Animation Start');
-
     animationLoadingRouterStart({
       loadingBackground: styles.background,
       loadingText: styles.text,
@@ -59,8 +51,6 @@ export function Loading() {
   }, []);
 
   const aniEndRouter = useCallback(() => {
-    console.log('Animation End');
-
     animationLoadingRouterlEnd({
       loadingBackground: styles.background,
       loadingText: styles.text,

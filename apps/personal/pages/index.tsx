@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react';
 import { useTheme } from 'next-themes';
+import { NextSeo } from 'next-seo';
 import classNames from 'classnames';
+import { site } from '@rendiriz-ecosystem/personal/config';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { DefaultContainer } from '@rendiriz-ecosystem/personal/templates';
 import { Footer } from '@rendiriz-ecosystem/personal/templates';
@@ -34,6 +36,14 @@ export function Home() {
 
   return (
     <>
+      <NextSeo
+        title={site.title}
+        titleTemplate="%s"
+        description={site.description}
+        canonical={site.siteUrl}
+        noindex={site.noIndex}
+        additionalLinkTags={site.favicon}
+      />
       <main
         ref={main}
         className={classNames('content', 'w-full overflow-hidden opacity-100')}
