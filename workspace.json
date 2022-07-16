@@ -9,6 +9,7 @@
     "personal-contexts": "libs/personal/contexts",
     "personal-e2e": "apps/personal-e2e",
     "personal-hooks": "libs/personal/hooks",
+    "personal-lib": "libs/personal/lib",
     "personal-templates": "libs/personal/templates",
     "personal-utils": "libs/personal/utils"
   }

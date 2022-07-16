@@ -7,3 +7,4 @@ export * from './lib/about-content/about-content';
 export * from './lib/about-image/about-image';
 export * from './lib/about-image-v2/about-image-v2';
 export * from './lib/about-contact/about-contact';
+export * from './lib/blog-post-preview/blog-post-preview';

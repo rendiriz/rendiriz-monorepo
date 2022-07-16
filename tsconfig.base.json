@@ -30,6 +30,7 @@
       "@rendiriz-ecosystem/personal/hooks": [
         "libs/personal/hooks/src/index.ts"
       ],
+      "@rendiriz-ecosystem/personal/lib": ["libs/personal/lib/src/index.ts"],
       "@rendiriz-ecosystem/personal/templates": [
         "libs/personal/templates/src/index.ts"
       ],
