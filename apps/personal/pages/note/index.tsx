@@ -31,7 +31,7 @@ export function Note({
     import('locomotive-scroll').then((LocomotiveScroll) => {
       scroll = new LocomotiveScroll.default({
         el: main.current,
-        smooth: true,
+        smooth: false,
         smoothMobile: false,
       });
     });
