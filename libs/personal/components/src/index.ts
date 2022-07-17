@@ -8,3 +8,8 @@ export * from './lib/about-image/about-image';
 export * from './lib/about-image-v2/about-image-v2';
 export * from './lib/about-contact/about-contact';
 export * from './lib/blog-post-preview/blog-post-preview';
+export * from './lib/blog-post/blog-post';
+export * from './lib/blog-view-counter/blog-view-counter';
+export * from './lib/blog-footer/blog-footer';
+export * from './lib/tweet/tweet';
+export * from './lib/mdx-component/mdx-component';

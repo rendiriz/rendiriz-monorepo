@@ -6,8 +6,10 @@ import classNames from 'classnames';
 import { site } from '@rendiriz-ecosystem/personal/config';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { DefaultContainer } from '@rendiriz-ecosystem/personal/templates';
-import { Footer } from '@rendiriz-ecosystem/personal/templates';
-import { BlogPostPreview } from '@rendiriz-ecosystem/personal/components';
+import {
+  BlogPostPreview,
+  BlogFooter,
+} from '@rendiriz-ecosystem/personal/components';
 import { getClient, indexQuery, Post } from '@rendiriz-ecosystem/personal/lib';
 
 export function Blog({
@@ -65,10 +67,10 @@ export function Blog({
           data-scroll-section
           className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16"
         >
-          <h1 className="font-serif text-center text-4xl lg:text-6xl xl:text-7xl mb-4">
+          <h1 className="font-serif text-center text-3xl lg:text-5xl xl:text-6xl mb-8">
             BLOG
           </h1>
-          <div className="relative w-full mb-8">
+          <div className="relative w-full mb-10">
             <input
               aria-label="Search articles"
               type="text"
@@ -107,7 +109,7 @@ export function Blog({
             ))}
           </Suspense>
         </div>
-        <Footer theme={theme} setTheme={setTheme} />
+        <BlogFooter theme={theme} setTheme={setTheme} />
       </main>
     </>
   );

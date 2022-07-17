@@ -58,7 +58,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['unsplash.it', 'placehold.co'],
+    domains: ['unsplash.it', 'placehold.co', 'pbs.twimg.com', 'cdn.sanity.io'],
   },
 };
 

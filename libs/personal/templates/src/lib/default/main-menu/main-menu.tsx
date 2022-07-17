@@ -51,7 +51,7 @@ export function MainMenu() {
             <li className={classNames(styles.itemSecondary)}>
               <Link href="/note">
                 <a className={classNames(styles.linkSecondary, 'link-hover')}>
-                  {'Note'.split('').map((letter: string, i: number) => (
+                  {'Snippets'.split('').map((letter: string, i: number) => (
                     <span
                       key={i}
                       className={classNames(styles.letterSecondary)}
@@ -65,7 +65,7 @@ export function MainMenu() {
             <li className={classNames(styles.itemSecondary)}>
               <Link href="/bookmark">
                 <a className={classNames(styles.linkSecondary, 'link-hover')}>
-                  {'Bookmark'.split('').map((letter: string, i: number) => (
+                  {'Bookmarks'.split('').map((letter: string, i: number) => (
                     <span
                       key={i}
                       className={classNames(styles.letterSecondary)}
