@@ -27,7 +27,7 @@ export function Blog({
     import('locomotive-scroll').then((LocomotiveScroll) => {
       scroll = new LocomotiveScroll.default({
         el: main.current,
-        smooth: false,
+        smooth: true,
         smoothMobile: false,
       });
     });
@@ -65,7 +65,7 @@ export function Blog({
         />
         <div
           data-scroll-section
-          className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16"
+          className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16 px-6 md:px-0"
         >
           <h1 className="font-serif text-center text-3xl lg:text-5xl xl:text-6xl mb-8">
             BLOG

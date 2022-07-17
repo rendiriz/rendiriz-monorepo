@@ -14,7 +14,7 @@ export function BlogPost({
       <Link href="/blog">
         <a className="mb-6 hover:underline link-hover">cd..</a>
       </Link>
-      <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16 px-6 md:px-0">
+      <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16">
         <h1 className="mb-4 text-3xl font-bold tracking-tight !leading-[1.15] text-stone-800 md:text-5xl dark:text-slate-200">
           {post.title}
         </h1>
@@ -32,9 +32,7 @@ export function BlogPost({
           </p>
         </div>
         <Suspense fallback={null}>
-          <div className="w-full mt-8 prose dark:prose-dark max-w-none">
-            {children}
-          </div>
+          <div className="w-full mt-8 prose dark:prose-dark">{children}</div>
         </Suspense>
       </article>
     </>

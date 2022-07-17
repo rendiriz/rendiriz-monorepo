@@ -35,7 +35,7 @@ export function NoteDetail({ post }: { post: Note }) {
     import('locomotive-scroll').then((LocomotiveScroll) => {
       scroll = new LocomotiveScroll.default({
         el: main.current,
-        smooth: false,
+        smooth: true,
         smoothMobile: false,
       });
     });
@@ -91,7 +91,7 @@ export function NoteDetail({ post }: { post: Note }) {
         />
         <div
           data-scroll-section
-          className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16"
+          className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16 px-6 md:px-0"
         >
           <NotePost post={post}>
             <MDXRemote
@@ -129,8 +129,6 @@ export async function getStaticProps({ params, preview = false }) {
   const { note } = await getClient(preview).fetch(noteQuery, {
     slug: params.slug,
   });
-
-  console.log(note);
 
   if (!note) {
     return { notFound: true };

@@ -7,3 +7,4 @@ export * from './fetcher';
 export * from './prisma';
 export * from './mdx';
 export * from './twitter';
+export * from './spotify';

@@ -16,3 +16,4 @@ export * from './lib/note-post/note-post';
 export * from './lib/note-view-counter/note-view-counter';
 export * from './lib/tweet/tweet';
 export * from './lib/mdx-component/mdx-component';
+export * from './lib/now-playing/now-playing';

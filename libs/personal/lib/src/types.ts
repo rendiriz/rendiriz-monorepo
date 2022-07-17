@@ -31,3 +31,12 @@ export type Note = {
 export type NoteViews = {
   total: number;
 };
+
+export type NowPlayingSong = {
+  album: string;
+  albumImageUrl: string;
+  artist: string;
+  isPlaying: boolean;
+  songUrl: string;
+  title: string;
+};

@@ -5,6 +5,7 @@ import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { IconContext } from 'react-icons';
 import { IoSunnySharp, IoMoonSharp } from 'react-icons/io5';
 import styles from './blog-footer.module.scss';
+import { NowPlaying } from '../now-playing/now-playing';
 
 export function BlogFooter({ theme, setTheme }: any) {
   const [isCopied, setIsCoppied] = useState<boolean>(false);
@@ -61,6 +62,9 @@ export function BlogFooter({ theme, setTheme }: any) {
 
   return (
     <div data-scroll-section className={classNames(styles.main)}>
+      <div>
+        <NowPlaying from="blog" />
+      </div>
       <footer className={classNames(styles.footer)}>
         <div className={classNames(styles.themeInformation)}>
           <div>
