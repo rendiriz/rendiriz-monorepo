@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
+import { NowPlaying } from '@rendiriz-ecosystem/personal/components';
 import { IconContext } from 'react-icons';
 import { IoSunnySharp, IoMoonSharp } from 'react-icons/io5';
 import styles from './footer.module.scss';
@@ -61,6 +62,9 @@ export function Footer({ theme, setTheme }: any) {
 
   return (
     <footer data-scroll-section className={classNames(styles.main)}>
+      <div>
+        <NowPlaying from="default" />
+      </div>
       <div className={classNames(styles.themeInformation)}>
         <div>
           <div
