@@ -22,3 +22,8 @@ model post_views {
   slug  String @id @db.VarChar(128)
   count BigInt @default(1)
 }
+
+model note_views {
+  slug  String @id @db.VarChar(128)
+  count BigInt @default(1)
+}

@@ -39,7 +39,7 @@ module.exports = {
             thead: {
               borderBottomColor: theme('colors.stone.200'),
             },
-            code: { color: theme('colors.pink.500') },
+            code: { color: `${theme('colors.pink.400')} !important` },
             'blockquote p:first-of-type::before': false,
             'blockquote p:last-of-type::after': false,
           },

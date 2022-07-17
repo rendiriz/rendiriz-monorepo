@@ -7,7 +7,7 @@ import { site } from '@rendiriz-ecosystem/personal/config';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { DefaultContainer } from '@rendiriz-ecosystem/personal/templates';
 import {
-  BlogPost,
+  NotePost,
   BlogFooter,
   Tweet,
   MDXComponents,
@@ -15,15 +15,15 @@ import {
 import {
   sanityClient,
   getClient,
-  postQuery,
-  postSlugsQuery,
-  Post,
+  noteQuery,
+  noteSlugsQuery,
+  Note,
   getTweets,
   mdxToHtml,
   urlForImage,
 } from '@rendiriz-ecosystem/personal/lib';
 
-export function BlogDetail({ post }: { post: Post }) {
+export function NoteDetail({ post }: { post: Note }) {
   const main = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -60,13 +60,13 @@ export function BlogDetail({ post }: { post: Post }) {
         title={post.title}
         titleTemplate={`%s — ${site.title}`}
         description={post.excerpt}
-        canonical={`${site.siteUrl}/blog/${post.slug}`}
+        canonical={`${site.siteUrl}/note/${post.slug}`}
         noindex={site.noIndex}
         additionalLinkTags={site.favicon}
         openGraph={{
           title: post.title,
           description: post.excerpt,
-          url: `${site.siteUrl}/blog/${post.slug}`,
+          url: `${site.siteUrl}/note/${post.slug}`,
           type: 'article',
           article: {
             publishedTime: new Date(post.date).toISOString(),
@@ -93,7 +93,7 @@ export function BlogDetail({ post }: { post: Post }) {
           data-scroll-section
           className="flex flex-col items-start justify-center max-w-2xl mx-auto mb-16"
         >
-          <BlogPost post={post}>
+          <NotePost post={post}>
             <MDXRemote
               {...post.content}
               components={
@@ -103,7 +103,7 @@ export function BlogDetail({ post }: { post: Post }) {
                 } as any
               }
             />
-          </BlogPost>
+          </NotePost>
         </div>
         <BlogFooter theme={theme} setTheme={setTheme} />
       </main>
@@ -111,14 +111,14 @@ export function BlogDetail({ post }: { post: Post }) {
   );
 }
 
-BlogDetail.Layout = function getLayout(page) {
+NoteDetail.Layout = function getLayout(page) {
   return <DefaultContainer>{page}</DefaultContainer>;
 };
 
-export default BlogDetail;
+export default NoteDetail;
 
 export async function getStaticPaths() {
-  const paths = await sanityClient.fetch(postSlugsQuery);
+  const paths = await sanityClient.fetch(noteSlugsQuery);
   return {
     paths: paths.map((slug) => ({ params: { slug } })),
     fallback: 'blocking',
@@ -126,21 +126,23 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const { post } = await getClient(preview).fetch(postQuery, {
+  const { note } = await getClient(preview).fetch(noteQuery, {
     slug: params.slug,
   });
 
-  if (!post) {
+  console.log(note);
+
+  if (!note) {
     return { notFound: true };
   }
 
-  const { html, tweetIDs, readingTime } = await mdxToHtml(post.content);
+  const { html, tweetIDs, readingTime } = await mdxToHtml(note.content);
   const tweets = await getTweets(tweetIDs);
 
   return {
     props: {
       post: {
-        ...post,
+        ...note,
         content: html,
         tweets,
         readingTime,

@@ -2,16 +2,16 @@ import Link from 'next/link';
 import { parseISO, format } from 'date-fns';
 import { PropsWithChildren, Suspense } from 'react';
 
-import { BlogViewCounter } from '../blog-view-counter/blog-view-counter';
+import { NoteViewCounter } from '../note-view-counter/note-view-counter';
 import { Post } from '@rendiriz-ecosystem/personal/lib';
 
-export function BlogPost({
+export function NotePost({
   children,
   post,
 }: PropsWithChildren<{ post: Post }>) {
   return (
     <>
-      <Link href="/blog">
+      <Link href="/note">
         <a className="mb-6 hover:underline link-hover">cd..</a>
       </Link>
       <article className="flex flex-col items-start justify-center w-full max-w-2xl mx-auto mb-16 px-6 md:px-0">
@@ -28,7 +28,7 @@ export function BlogPost({
           <p className="mt-2 text-sm text-stone-600 dark:text-slate-400 min-w-32 md:mt-0">
             {post.readingTime}
             {` • `}
-            <BlogViewCounter slug={post.slug} />
+            <NoteViewCounter slug={post.slug} />
           </p>
         </div>
         <Suspense fallback={null}>
@@ -41,4 +41,4 @@ export function BlogPost({
   );
 }
 
-export default BlogPost;
+export default NotePost;

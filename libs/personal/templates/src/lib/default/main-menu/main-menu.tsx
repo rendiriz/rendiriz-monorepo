@@ -51,7 +51,7 @@ export function MainMenu() {
             <li className={classNames(styles.itemSecondary)}>
               <Link href="/note">
                 <a className={classNames(styles.linkSecondary, 'link-hover')}>
-                  {'Snippets'.split('').map((letter: string, i: number) => (
+                  {'Notes'.split('').map((letter: string, i: number) => (
                     <span
                       key={i}
                       className={classNames(styles.letterSecondary)}

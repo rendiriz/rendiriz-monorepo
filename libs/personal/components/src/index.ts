@@ -11,5 +11,8 @@ export * from './lib/blog-post-preview/blog-post-preview';
 export * from './lib/blog-post/blog-post';
 export * from './lib/blog-view-counter/blog-view-counter';
 export * from './lib/blog-footer/blog-footer';
+export * from './lib/note-post-preview/note-post-preview';
+export * from './lib/note-post/note-post';
+export * from './lib/note-view-counter/note-view-counter';
 export * from './lib/tweet/tweet';
 export * from './lib/mdx-component/mdx-component';
