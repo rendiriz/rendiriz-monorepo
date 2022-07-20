@@ -23,19 +23,8 @@ function MyApp({ Component, pageProps }: AppWithLayout) {
       </ThemeProvider>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NX_GA_TRACKING_ID}`}
-        strategy="afterInteractive"
+        strategy="worker"
       />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', '${process.env.NX_GA_TRACKING_ID}', { 
-            page_path: window.location.pathname,
-          });
-        `}
-      </Script>
     </>
   );
 }

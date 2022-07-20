@@ -66,6 +66,9 @@ const nextConfig = {
       'ik.imagekit.io',
     ],
   },
+  experimental: {
+    nextScriptWorkers: true,
+  },
 };
 
 module.exports = withPlugins([[withNx]], nextConfig);
