@@ -4,12 +4,13 @@
   "license": "MIT",
   "scripts": {
     "*** Development ***": "",
-    "dev:personal": "env-cmd -f apps/personal/.env.local nx serve personal",
+    "dev:personal": "npm run partytown && env-cmd -f apps/personal/.env.local nx serve personal",
     "generate:personal": "env-cmd -f apps/personal/.env.local npx prisma generate --schema=apps/personal/prisma/schema.prisma",
     "migrate:personal": "env-cmd -f apps/personal/.env.local npx prisma migrate dev --schema=apps/personal/prisma/schema.prisma",
-    "sanity-start": "sanity start",
+    "partytown:personal": "partytown copylib apps/personal/public/~partytown",
     "*** Other ***": "",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "sanity-start": "sanity start"
   },
   "private": true,
   "devDependencies": {
@@ -66,6 +67,7 @@
     "typescript": "~4.7.2"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.6.2",
     "@nrwl/next": "14.3.6",
     "@prisma/client": "^4.0.0",
     "@sanity/image-url": "^1.0.1",
