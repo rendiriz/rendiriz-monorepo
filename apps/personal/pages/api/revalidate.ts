@@ -17,6 +17,7 @@ export default async function handler(req, res) {
   }
 
   const body = await readBody(req);
+
   if (!isValidSignature(body, signature, secret)) {
     return res.status(401).json({ message: 'Invalid signature' });
   }
@@ -42,6 +43,12 @@ export default async function handler(req, res) {
     return res.status(500).json({ message: err.message });
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 async function readBody(readable) {
   const chunks = [];
