@@ -58,10 +58,13 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['unsplash.it', 'placehold.co', 'pbs.twimg.com', 'cdn.sanity.io'],
-  },
-  experimental: {
-    nextScriptWorkers: true,
+    domains: [
+      'unsplash.it',
+      'placehold.co',
+      'pbs.twimg.com',
+      'cdn.sanity.io',
+      'ik.imagekit.io',
+    ],
   },
 };
 
