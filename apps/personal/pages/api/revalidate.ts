@@ -27,7 +27,8 @@ export default async function handler(req, res) {
   //   return res.status(401).json({ message: 'Invalid request' });
   // }
 
-  const { _id: id } = req.body;
+  const jsonBody = JSON.parse(body);
+  const { _id: id } = jsonBody;
   if (typeof id !== 'string' || !id) {
     return res.status(400).json({ message: 'Invalid _id' });
   }
@@ -35,8 +36,8 @@ export default async function handler(req, res) {
   try {
     const slug = await sanityClient.fetch(noteUpdatedQuery, { id });
     await Promise.all([
-      res.revalidate('/note'),
-      res.revalidate(`/note/${slug}`),
+      res.unstable_revalidate('/note'),
+      res.unstable_revalidate(`/note/${slug}`),
     ]);
     return res.status(200).json({ message: `Updated ${slug}` });
   } catch (err) {
