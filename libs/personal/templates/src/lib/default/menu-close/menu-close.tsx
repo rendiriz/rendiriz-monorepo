@@ -95,6 +95,7 @@ export function MenuClose() {
       </div>
       <button
         type="button"
+        aria-label="Close Menu"
         className={classNames(styles.button)}
         onClick={handleButtonClick}
       >

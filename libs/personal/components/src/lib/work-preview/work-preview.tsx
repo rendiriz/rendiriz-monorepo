@@ -130,7 +130,7 @@ export function WorkPreview() {
     <>
       <div data-scroll-section className={classNames(styles.main)}>
         <div className={classNames(styles.information, 'mb-4')}>
-          <h5 className={classNames('font-mono')}>WORKS</h5>
+          <div className={classNames('font-mono')}>WORKS</div>
         </div>
         <ul className={classNames(styles.list)}>
           {data.map((item, index) => (

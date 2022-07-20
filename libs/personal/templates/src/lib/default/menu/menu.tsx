@@ -82,6 +82,7 @@ export function Menu() {
       </div>
       <button
         type="button"
+        aria-label="Open Menu"
         className={classNames(styles.button)}
         onClick={handleButtonClick}
       >

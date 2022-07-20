@@ -97,6 +97,7 @@ export function BlogFooter({ theme, setTheme }: any) {
           <div>
             <button
               type="button"
+              aria-label="Toggle Theme"
               className={classNames('link-hover')}
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             >

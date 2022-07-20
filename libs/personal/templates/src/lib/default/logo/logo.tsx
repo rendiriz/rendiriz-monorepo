@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import classNames from 'classnames';
+import { site } from '@rendiriz-ecosystem/personal/config';
 import styles from './logo.module.scss';
 
 export function Logo() {
   return (
     <header className={classNames(styles.main)}>
       <Link href="/">
-        <a className={classNames(styles.link, 'link-hover')}>
+        <a
+          aria-label={site.title}
+          className={classNames(styles.link, 'link-hover')}
+        >
           <svg
             width="92"
             height="83"
