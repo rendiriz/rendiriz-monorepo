@@ -8,7 +8,7 @@
     "dev:generate:personal": "env-cmd -f apps/personal/.env.local npm run prisma:generate:personal",
     "dev:migrate:personal": "env-cmd -f apps/personal/.env.local npm run prisma:migrate:personal",
     "*** Production ***": "",
-    "build:prod:personal": "npx nx build personal --prod",
+    "build:prod:personal": "nx run personal:build:production",
     "*** Prisma ***": "",
     "prisma:generate:personal": "npx prisma generate --schema=apps/personal/prisma/schema.prisma",
     "prisma:migrate:personal": "npx prisma migrate dev --schema=apps/personal/prisma/schema.prisma",
