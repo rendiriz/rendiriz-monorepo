@@ -18,35 +18,40 @@ export function WorkPreview() {
       title: 'Kitabikin Invitation',
       backgroundBefore: 'before:bg-[#073B57]',
       backgroundAfter: 'after:bg-[#073B57]',
-      image: '/kitabikin-invitation-2.png',
+      image:
+        'https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/kitabikin-invitation_UCQktjgre-.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658330152271',
       tags: ['React', 'Next.js', 'Chakra UI'],
     },
     {
       title: 'Pikobar Case Reporting Dashboard',
       backgroundBefore: 'before:bg-[#27ae60]',
       backgroundAfter: 'after:bg-[#27ae60]',
-      image: '/pikobar-pelaporan.png',
+      image:
+        'https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/pikobar-pelaporan_ZoTGpLoCT.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658330152452',
       tags: ['Vue', 'Vuetify'],
     },
     {
       title: 'West Java Data Ecosystem',
       backgroundBefore: 'before:bg-[#EEF6F8]',
       backgroundAfter: 'after:bg-[#EEF6F8]',
-      image: '/ekosistem-data-jabar-1.png',
+      image:
+        'https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/ekosistem-data-jabar_errt6Krsd.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658330152604',
       tags: ['Angular', 'Bootstrap'],
     },
     {
       title: 'West Java Open Data',
       backgroundBefore: 'before:bg-[#006430]',
       backgroundAfter: 'after:bg-[#006430]',
-      image: '/open-data-jabar-1.png',
+      image:
+        'https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/open-data-jabar_NdusPzWYw.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658330152816',
       tags: ['Angular', 'Bootstrap', 'NgRx'],
     },
     {
       title: 'West Java One Data',
       backgroundBefore: 'before:bg-[#0753a6]',
       backgroundAfter: 'after:bg-[#0753a6]',
-      image: '/satu-data-jabar-1.png',
+      image:
+        'https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/satu-data-jabar_5OlPtZxg05.png?ik-sdk-version=javascript-1.4.3&updatedAt=1658330153103',
       tags: ['Angular', 'Emotion', 'NgRx'],
     },
   ];

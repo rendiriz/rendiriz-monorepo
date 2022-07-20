@@ -13,7 +13,7 @@ export const site = {
       rel: 'icon',
       tyoe: 'image/svg+xml',
       sizes: '192x192',
-      href: `/favicon.svg`,
+      href: `https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/favicon_IMxZJm5bI.svg?ik-sdk-version=javascript-1.4.3&updatedAt=1658330442790`,
     },
   ],
 };
