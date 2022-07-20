@@ -6,7 +6,10 @@ class MyDocument extends Document {
   render(): ReactElement {
     return (
       <Html lang="en">
-        <Head>
+        <Head />
+        <body>
+          <Main />
+          <NextScript />
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NX_GA_TRACKING_ID}`}
             strategy="afterInteractive"
@@ -28,10 +31,6 @@ class MyDocument extends Document {
               heap.load("${process.env.NX_HEAP_TRACKING_ID}");
             `}
           </Script>
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
         </body>
       </Html>
     );
