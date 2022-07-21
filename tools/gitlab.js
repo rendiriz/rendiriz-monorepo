@@ -1,3 +1,5 @@
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 const PROJECT_ID = 14510167;
 
 async function getData() {
