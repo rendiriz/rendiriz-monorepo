@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run pre-push
+while read lref lname rref rname
+do
+  npm run pre-push --lref $lref --lname $lname --rref $rref --rname $rname
+done
