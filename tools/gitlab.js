@@ -6,7 +6,11 @@ async function getData() {
   );
 }
 
-getData().then(async (response) => {
-  const data = await response.json();
-  console.log(data);
-});
+getData()
+  .then(async (response) => {
+    const data = await response.json();
+    console.log(data);
+  })
+  .catch(() => {
+    execSync('exit 1');
+  });
