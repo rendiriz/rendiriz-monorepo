@@ -11,6 +11,7 @@ getData()
     const data = await response.json();
     console.log(data);
   })
-  .catch(() => {
+  .catch((error) => {
+    console.log(error);
     process.exit(1);
   });
