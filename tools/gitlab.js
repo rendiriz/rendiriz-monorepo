@@ -12,5 +12,5 @@ getData()
     console.log(data);
   })
   .catch(() => {
-    execSync('exit 1');
+    process.exit(1);
   });
