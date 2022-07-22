@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { PrismaClient } from '@prisma/client';
-const { env } = require('../env');
+import { env } from '../env';
 
 declare global {
   // eslint-disable-next-line no-var
