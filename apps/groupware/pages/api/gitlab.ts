@@ -72,11 +72,16 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const body = req.body;
-  const id = body.project.id;
-  const sha = body.checkout_sha;
+  const id = body.project_id || body.project.id;
+  const sha = body.checkout_sha || body.after || body.commits[0]?.id;
+  const username = body.user_username;
 
   if (!id && !sha) {
     return res.status(400).json({ message: 'Invalid request' });
+  }
+
+  if (username !== 'rendiriz') {
+    return res.status(400).json({ message: 'Invalid user' });
   }
 
   // Get Gitlab Commit

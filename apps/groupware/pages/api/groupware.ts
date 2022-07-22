@@ -41,7 +41,7 @@ const getItem = async (req: NextApiRequest, res: NextApiResponse) => {
     await browser.close();
   }
 
-  res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate');
+  // res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate');
   res.setHeader('Content-Type', 'image/png');
   res.end(result);
 };
