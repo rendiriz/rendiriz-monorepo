@@ -12,6 +12,7 @@
     "dev:migrate:groupware": "env-cmd -f apps/groupware/.env.local npm run prisma:migrate:groupware",
     "*** Production ***": "",
     "build:prod:personal": "nx run personal:build:production",
+    "build:prod:groupware": "nx run groupware:build:production",
     "*** Prisma ***": "",
     "prisma:generate:personal": "npx prisma generate --schema=apps/personal/prisma/schema.prisma",
     "prisma:migrate:personal": "npx prisma migrate dev --schema=apps/personal/prisma/schema.prisma",
