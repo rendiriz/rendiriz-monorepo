@@ -7,11 +7,19 @@ const getItem = async (req: NextApiRequest, res: NextApiResponse) => {
   let result = null;
   let browser = null;
 
-  browser = await puppeteer.launch({
-    args: chromium.args,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
-  });
+  if (process.env.AWS_EXECUTION_ENV) {
+    browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+    });
+  } else {
+    browser = await puppeteer.launch({
+      args: [],
+      executablePath: '/usr/bin/google-chrome',
+      headless: true,
+    });
+  }
 
   const page = await browser.newPage();
 
