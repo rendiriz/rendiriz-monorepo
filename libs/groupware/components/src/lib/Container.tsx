@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import NextLink from 'next/link';
 import { useTheme } from 'next-themes';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { NextSeo } from 'next-seo';
 import cn from 'classnames';
 
 type ContainerProps = {
@@ -36,6 +37,7 @@ function NavItem({ href, label }: NavItemProps) {
 }
 
 export function Container({ children }: ContainerProps) {
+  const router = useRouter();
   const { data: session } = useSession();
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
@@ -44,6 +46,18 @@ export function Container({ children }: ContainerProps) {
 
   return (
     <>
+      <NextSeo
+        title={'Groupware'}
+        description={'Groupware'}
+        noindex={false}
+        canonical={`https://groupware.rendiriz.com${router.asPath}`}
+        openGraph={{
+          type: 'website',
+          url: `https://groupware.rendiriz.com${router.asPath}`,
+          title: 'Groupware',
+          description: 'Groupware',
+        }}
+      />
       <div className="bg-stone-100 text-stone-800 dark:bg-slate-800 dark:text-slate-100">
         <div className="flex flex-col justify-center px-8">
           <nav
