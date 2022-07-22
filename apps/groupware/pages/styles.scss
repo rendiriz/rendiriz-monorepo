@@ -1,0 +1,47 @@
+/* stylelint-disable font-family-name-quotes */
+/* stylelint-disable scss/at-rule-no-unknown */
+/* stylelint-disable selector-class-pattern */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Marcellus&family=Roboto+Mono&display=swap');
+
+@tailwind components;
+@tailwind base;
+@tailwind utilities;
+
+::selection {
+  background-color: #47a3f3;
+  color: #fefefe;
+}
+
+html {
+  min-width: 360px;
+  scroll-behavior: smooth;
+}
+
+/* stylelint-disable-next-line selector-id-pattern */
+#__next {
+  @apply bg-stone-100 text-stone-800 dark:bg-slate-800 dark:text-slate-100;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.capsize::before {
+  content: '';
+  margin-bottom: -0.098em;
+  display: table;
+}
+
+.capsize::after {
+  content: '';
+  margin-top: -0.219em;
+  display: table;
+}
+
+.skip-nav {
+  @apply absolute px-4 py-3 transition-transform duration-200 transform -translate-y-12 -left-1/4 focus:top-4 focus:translate-y-3 -top-8;
+}
+
+#skip {
+  scroll-margin-top: 1.125rem;
+}

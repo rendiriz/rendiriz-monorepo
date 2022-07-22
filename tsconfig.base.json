@@ -15,6 +15,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@rendiriz-ecosystem/groupware/components": [
+        "libs/groupware/components/src/index.ts"
+      ],
+      "@rendiriz-ecosystem/groupware/server": [
+        "libs/groupware/server/src/index.ts"
+      ],
+      "@rendiriz-ecosystem/groupware/utils": [
+        "libs/groupware/utils/src/index.ts"
+      ],
       "@rendiriz-ecosystem/personal/components": [
         "libs/personal/components/src/index.ts"
       ],
