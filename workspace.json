@@ -2,6 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
+    "groupware": "apps/groupware",
+    "groupware-components": "libs/groupware/components",
+    "groupware-e2e": "apps/groupware-e2e",
     "personal": "apps/personal",
     "personal-components": "libs/personal/components",
     "personal-config": "libs/personal/config",
