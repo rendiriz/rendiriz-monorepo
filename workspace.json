@@ -5,6 +5,7 @@
     "groupware": "apps/groupware",
     "groupware-components": "libs/groupware/components",
     "groupware-e2e": "apps/groupware-e2e",
+    "groupware-types": "libs/groupware/types",
     "personal": "apps/personal",
     "personal-components": "libs/personal/components",
     "personal-config": "libs/personal/config",

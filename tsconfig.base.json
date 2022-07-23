@@ -21,6 +21,12 @@
       "@rendiriz-ecosystem/groupware/server": [
         "libs/groupware/server/src/index.ts"
       ],
+      "@rendiriz-ecosystem/groupware/styles": [
+        "libs/groupware/styles/src/index.ts"
+      ],
+      "@rendiriz-ecosystem/groupware/types": [
+        "libs/groupware/types/src/index.ts"
+      ],
       "@rendiriz-ecosystem/groupware/utils": [
         "libs/groupware/utils/src/index.ts"
       ],

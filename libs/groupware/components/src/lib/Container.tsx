@@ -5,6 +5,7 @@ import { useTheme } from 'next-themes';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { NextSeo } from 'next-seo';
 import cn from 'classnames';
+import MobileMenu from './MobileMenu';
 
 type ContainerProps = {
   children: React.ReactNode;
@@ -70,7 +71,9 @@ export function Container({ children }: ContainerProps) {
               Skip to content
             </a>
             <div className="ml-[-0.60rem]">
-              <NavItem href="/" label="Home" />
+              <MobileMenu />
+              <NavItem href="/" label="Beranda" />
+              {session && <NavItem href="/logbook" label="Laporan" />}
             </div>
             <div className="flex items-center">
               {!session && (

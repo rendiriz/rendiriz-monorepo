@@ -75,20 +75,21 @@ model Commit {
 }
 
 model Logbook {
-  id               String   @id @default(cuid())
+  id               String    @id @default(cuid())
   commitId         String
   projectId        String
   projectName      String
   nameTask         String
   tupoksiJabatanId String
   dateTask         DateTime
+  dateSend         DateTime?
   difficultyTask   Int
   evidenceTask     String?
   documentTask     String
-  workPlace        String   @default("WFH")
-  organizerTask    String   @default("JDS")
+  workPlace        String    @default("WFH")
+  organizerTask    String    @default("JDS")
   isMainTask       Boolean?
-  isDocumentLink   Boolean  @default(true)
+  isDocumentLink   Boolean   @default(true)
   isStatus         String
-  commit           Commit   @relation(fields: [commitId], references: [id], onDelete: Cascade)
+  commit           Commit    @relation(fields: [commitId], references: [id], onDelete: Cascade)
 }
