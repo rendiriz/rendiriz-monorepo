@@ -12,7 +12,7 @@ import {
   useTablePagination,
 } from '@rendiriz-ecosystem/shared/components';
 
-const paginationState: TPaginationTableFilter = { perPage: 1, page: 1 };
+const paginationState: TPaginationTableFilter = { perPage: 10, page: 1 };
 
 export function LogbookPage() {
   const { data: session } = useSession();
