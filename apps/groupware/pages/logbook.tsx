@@ -1,3 +1,4 @@
+import { Fragment, useState, useRef } from 'react';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
 import { unstable_getServerSession } from 'next-auth/next';
@@ -10,13 +11,52 @@ import { TPaginationTableFilter } from '@rendiriz-ecosystem/shared/types';
 import {
   TablePagination,
   useTablePagination,
+  Button,
 } from '@rendiriz-ecosystem/shared/components';
+import { Listbox, Transition } from '@headlessui/react';
+import { HiSelector } from 'react-icons/hi';
+
+type TProject = {
+  id: string;
+  name: string;
+  repo: string;
+} | null;
+
+const projectOption = new Map<string, TProject>([
+  [
+    '60170024fe6713001d100000',
+    {
+      id: '60170024fe6713001d100000',
+      name: 'Next On-Demand ISR',
+      repo: 'next-isr',
+    },
+  ],
+  [
+    '60170024fe6713001d160167',
+    {
+      id: '60170024fe6713001d160167',
+      name: 'Satu Data Jawa Barat',
+      repo: 'satudata-frontend',
+    },
+  ],
+  [
+    '602b9477621200001db91977',
+    {
+      id: '602b9477621200001db91977',
+      name: 'Portal Data Jabar',
+      repo: 'replikasi-pdj-frontend',
+    },
+  ],
+]);
 
 const paginationState: TPaginationTableFilter = { perPage: 10, page: 1 };
 
 export function LogbookPage() {
   const { data: session } = useSession();
   const { state, dispatch } = useTablePagination(paginationState);
+  const [bearer, setBearer] = useState<string | null>(null);
+  const [project, setProject] = useState<string | null>(null);
+  const inputBearer = useRef<HTMLInputElement>(null);
 
   if (typeof window === 'undefined') return null;
 
@@ -36,12 +76,21 @@ export function LogbookPage() {
       {
         perPage: state.perPage,
         page: state.page,
+        project: project,
       },
     ],
     {
       keepPreviousData: true,
     },
   );
+
+  const handleBearer = () => {
+    setBearer(inputBearer.current?.value || null);
+  };
+
+  const handleProject = (id: string) => {
+    setProject(id);
+  };
 
   return (
     <Container>
@@ -54,7 +103,83 @@ export function LogbookPage() {
         <div>
           {data && (
             <>
-              <div className="overflow-x-auto relative mt-6">
+              <div className="mt-6">
+                <label htmlFor="bearer" className="sr-only">
+                  Bearer
+                </label>
+                <div className="relative flex justify-between mb-4">
+                  <input
+                    ref={inputBearer}
+                    type="text"
+                    id="bearer"
+                    className="block px-3 py-2 mr-2 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="Bearer Token Groupware"
+                  />
+                  <Button type="button" onClick={() => handleBearer()}>
+                    Set
+                  </Button>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <Listbox value={project} onChange={handleProject}>
+                      <div className="relative">
+                        <Listbox.Button className="relative w-96 rounded-lg border border-gray-300 cursor-default bg-white py-2 pl-3 pr-10 text-left sm:text-sm">
+                          {project ? (
+                            <span className="block truncate">
+                              {projectOption.get(project)?.name}
+                            </span>
+                          ) : (
+                            <span className="block truncate text-gray-400">
+                              Pilih Project
+                            </span>
+                          )}
+                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <HiSelector
+                              className="h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </Listbox.Button>
+                        <Transition
+                          as={Fragment}
+                          leave="transition ease-in duration-100"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
+                        >
+                          <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            {[...projectOption].map(([key, res]) => (
+                              <Listbox.Option
+                                key={key}
+                                value={res?.id}
+                                className={({ active }) =>
+                                  `relative cursor-default select-none py-2 px-4 ${
+                                    active
+                                      ? 'bg-sky-100 text-sky-900'
+                                      : 'text-gray-800'
+                                  }`
+                                }
+                              >
+                                {({ selected }) => (
+                                  <>
+                                    <span
+                                      className={`block truncate ${
+                                        selected ? 'font-medium' : 'font-normal'
+                                      }`}
+                                    >
+                                      {res?.name}
+                                    </span>
+                                  </>
+                                )}
+                              </Listbox.Option>
+                            ))}
+                          </Listbox.Options>
+                        </Transition>
+                      </div>
+                    </Listbox>
+                  </div>
+                </div>
+              </div>
+              <div className="overflow-x-auto relative mt-4">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-200 dark:border-gray-700">
                   <thead className="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>

@@ -21,8 +21,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "groupware:build",
-        "dev": true,
-        "customServerPath": "server.js"
+        "dev": true
       },
       "configurations": {
         "development": {

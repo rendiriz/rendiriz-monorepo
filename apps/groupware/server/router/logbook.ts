@@ -19,28 +19,34 @@ export const logbookRouter = createRouter()
     input: z.object({
       perPage: z.number(),
       page: z.number(),
+      project: z.string().nullable(),
     }),
     async resolve({ ctx, input }) {
       const limit = input.perPage;
       const offset = limit * input.page - limit;
       const committerEmail = ctx.session?.user?.email || '';
 
+      const where = {
+        commit: {
+          committer_email: committerEmail,
+        },
+      };
+
+      if (input.project) {
+        Object.assign(where, { projectId: input.project });
+      }
+
       const result = await ctx.prisma.logbook.findMany({
         take: limit,
         skip: offset,
-        where: {
-          commit: {
-            committer_email: committerEmail,
-          },
+        orderBy: {
+          dateTask: 'desc',
         },
+        where,
       });
 
       const count = await ctx.prisma.logbook.count({
-        where: {
-          commit: {
-            committer_email: committerEmail,
-          },
-        },
+        where,
       });
 
       let paging: TPagination = { empty: true };
