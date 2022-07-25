@@ -6,7 +6,10 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { trpc } from '../utils/trpc';
 import { format } from 'date-fns';
 import { id } from 'date-fns/locale';
-import { Container } from '@rendiriz-ecosystem/groupware/components';
+import {
+  Container,
+  EvidenceDialog,
+} from '@rendiriz-ecosystem/groupware/components';
 import { TPaginationTableFilter } from '@rendiriz-ecosystem/shared/types';
 import {
   TablePagination,
@@ -14,7 +17,7 @@ import {
   Button,
 } from '@rendiriz-ecosystem/shared/components';
 import { Listbox, Transition } from '@headlessui/react';
-import { HiSelector } from 'react-icons/hi';
+import { HiSelector, HiCheckCircle, HiXCircle } from 'react-icons/hi';
 
 type TProject = {
   id: string;
@@ -57,6 +60,8 @@ export function LogbookPage() {
   const [bearer, setBearer] = useState<string | null>(null);
   const [project, setProject] = useState<string | null>(null);
   const inputBearer = useRef<HTMLInputElement>(null);
+  const [isOpenEvidence, setOpenEvidence] = useState(false);
+  const [selectedData, setSelectedData] = useState(null);
 
   if (typeof window === 'undefined') return null;
 
@@ -83,6 +88,7 @@ export function LogbookPage() {
       keepPreviousData: true,
     },
   );
+  const mutationGenerate = trpc.useMutation(['logbook.generateEvidence']);
 
   const handleBearer = () => {
     setBearer(inputBearer.current?.value || null);
@@ -90,6 +96,29 @@ export function LogbookPage() {
 
   const handleProject = (id: string) => {
     setProject(id);
+  };
+
+  const showDialogEvidence = (data: any) => {
+    setSelectedData(data);
+    setOpenEvidence(true);
+  };
+
+  const closeDialogEvidence = () => {
+    setSelectedData(null);
+    setOpenEvidence(false);
+  };
+
+  const generateEvidence = async ({
+    id,
+    documentTask,
+  }: {
+    id: string;
+    documentTask: string;
+  }) => {
+    mutationGenerate.mutate({
+      id,
+      documentTask,
+    });
   };
 
   return (
@@ -199,6 +228,9 @@ export function LogbookPage() {
                         Tanggal Kirim
                       </th>
                       <th scope="col" className="py-3 px-3 w-[10%]">
+                        Evidence
+                      </th>
+                      <th scope="col" className="py-3 px-3 w-[10%]">
                         Action
                       </th>
                     </tr>
@@ -230,13 +262,39 @@ export function LogbookPage() {
                               })
                             : '-'}
                         </td>
-                        <td className="py-4 px-3">
-                          <a
-                            href="#"
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                        <td className="py-4 px-3 flex gap-2">
+                          {res.evidenceTask ? (
+                            <HiCheckCircle
+                              className="h-5 w-5 text-green-400"
+                              aria-hidden="true"
+                            />
+                          ) : (
+                            <HiXCircle
+                              className="h-5 w-5 text-red-400"
+                              aria-hidden="true"
+                            />
+                          )}
+                          <Button
+                            type="button"
+                            variant="link"
+                            onClick={() => showDialogEvidence(res)}
                           >
-                            Edit
-                          </a>
+                            Evidence
+                          </Button>
+                          <EvidenceDialog
+                            data={selectedData}
+                            showDialog={isOpenEvidence}
+                            closeDialog={() => closeDialogEvidence()}
+                            generateEvidence={(res) => generateEvidence(res)}
+                            isLoading={mutationGenerate.isLoading}
+                            isError={mutationGenerate.isError}
+                            isSuccess={mutationGenerate.isSuccess}
+                          />
+                        </td>
+                        <td className="py-4 px-3">
+                          <Button type="button" variant="link">
+                            Kirim
+                          </Button>
                         </td>
                       </tr>
                     ))}
