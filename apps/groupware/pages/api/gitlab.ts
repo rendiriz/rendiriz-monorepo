@@ -73,10 +73,9 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const body = req.body;
   const id = body.project_id || body.project.id;
-  const sha = body.checkout_sha || body.after || body.commits[0]?.id;
   const username = body.user_username;
 
-  if (!id && !sha) {
+  if (!id) {
     return res.status(400).json({ message: 'Invalid request' });
   }
 
@@ -84,15 +83,16 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: 'Invalid user' });
   }
 
-  // Get Gitlab Commit
-  const gitlab = await fetch(
-    `https://gitlab.com/api/v4/projects/${id}/repository/commits/${sha}`,
-  );
-  const gitlabData = await gitlab.json();
+  const commitBody: any[] = [];
+  const logbookBody: any[] = [];
+  body.commits.forEach(async (commit: any) => {
+    // Get Gitlab Commit
+    const gitlab = await fetch(
+      `https://gitlab.com/api/v4/projects/${id}/repository/commits/${commit.id}`,
+    );
+    const gitlabData = await gitlab.json();
 
-  // Save to Table Commit
-  const commit = await prisma.commit.create({
-    data: {
+    commitBody.push({
       id: gitlabData.id,
       short_id: gitlabData.short_id,
       created_at: gitlabData.created_at,
@@ -107,32 +107,40 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
       web_url: gitlabData.web_url,
       status: gitlabData.status,
       project_id: gitlabData.project_id,
-    },
-  });
+    });
 
-  // Save to Table Logbook
-  const logbook = await prisma.logbook.create({
-    data: {
-      commitId: commit.id,
-      projectId: projectMap.get(commit.project_id)?.id || '',
-      projectName: projectMap.get(commit.project_id)?.name || '',
-      nameTask: commit.title,
+    logbookBody.push({
+      commitId: gitlabData.id,
+      projectId: projectMap.get(gitlabData.project_id)?.id || '',
+      projectName: projectMap.get(gitlabData.project_id)?.name || '',
+      nameTask: gitlabData.title,
       tupoksiJabatanId: '62d6421d-be8d-4390-ba5c-252108818350',
-      dateTask: commit.created_at,
-      difficultyTask: difficulty(commit.title),
+      dateTask: gitlabData.created_at,
+      difficultyTask: difficulty(gitlabData.title),
       evidenceTask: null,
-      documentTask: commit.web_url,
+      documentTask: gitlabData.web_url,
       workPlace: 'WFH',
       organizerTask: 'JDS',
       isMainTask: null,
       isDocumentLink: true,
       isStatus: 'draft',
-    },
+    });
+  });
+
+  // Save to Table Commit
+  const commit = await prisma.commit.createMany({
+    data: commitBody,
+  });
+
+  // Save to Table Logbook
+  const logbook = await prisma.logbook.createMany({
+    data: logbookBody,
   });
 
   res.status(200).json({
-    sha,
-    commit: logbook.nameTask,
+    project_id: id,
+    commit,
+    logbook,
   });
 };
 
