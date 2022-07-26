@@ -1,14 +1,15 @@
-import { Fragment, useState, useRef } from 'react';
+import { Fragment, useState, useRef, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import { useSession } from 'next-auth/react';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import { trpc } from '../utils/trpc';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { id } from 'date-fns/locale';
 import {
   Container,
   EvidenceDialog,
+  LogbookDialog,
 } from '@rendiriz-ecosystem/groupware/components';
 import { TPaginationTableFilter } from '@rendiriz-ecosystem/shared/types';
 import {
@@ -61,7 +62,9 @@ export function LogbookPage() {
   const [project, setProject] = useState<string | null>(null);
   const inputBearer = useRef<HTMLInputElement>(null);
   const [isOpenEvidence, setOpenEvidence] = useState(false);
+  const [isOpenLogbook, setOpenLogbook] = useState(false);
   const [selectedData, setSelectedData] = useState(null);
+  const [image, setImage] = useState(null);
 
   if (typeof window === 'undefined') return null;
 
@@ -89,6 +92,7 @@ export function LogbookPage() {
     },
   );
   const mutationGenerate = trpc.useMutation(['logbook.generateEvidence']);
+  const mutationLogbook = trpc.useMutation(['logbook.updateLogbook']);
 
   const handleBearer = () => {
     setBearer(inputBearer.current?.value || null);
@@ -119,6 +123,62 @@ export function LogbookPage() {
       id,
       documentTask,
     });
+  };
+
+  const showDialogLogbook = (data: any) => {
+    setSelectedData(data);
+    setOpenLogbook(true);
+  };
+
+  const closeDialogLogbook = () => {
+    setSelectedData(null);
+    setOpenLogbook(false);
+  };
+
+  const updateLogbook = async (formValues: any) => {
+    const image = await fetch(`/api/image?url=${formValues.documentTask}`);
+    const imageBlob = await image.blob();
+
+    const imageFile = new File([imageBlob], `${formValues.id}.png`, {
+      type: 'image/png',
+    });
+
+    // Save to Groupware
+    const formData = new FormData();
+    formData.append('projectId', '602b9477621200001db91977');
+    formData.append('projectName', 'Portal Data Jabar');
+    formData.append('nameTask', formValues.nameTask);
+    formData.append('tupoksiJabatanId', formValues.tupoksiJabatanId);
+    formData.append('isMainTask', formValues.isMainTask || false);
+    formData.append(
+      'dateTask',
+      format(parseISO(formValues.dateSend), 'yyyy-MM-dd').toString(),
+    );
+    formData.append('difficultyTask', String(formValues.difficultyTask));
+    formData.append('isDocumentLink', formValues.isDocumentLink || true);
+    formData.append('documentTask', formValues.documentTask);
+    formData.append('workPlace', formValues.workPlace);
+    formData.append('organizerTask', formValues.organizerTask);
+    formData.append('evidenceTask', imageFile);
+
+    const groupware = await fetch(`/api/groupware`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
+      body: formData,
+    });
+    const groupwareResult = await groupware.json();
+
+    console.log(groupwareResult);
+
+    if (!groupwareResult) {
+      console.log('Error');
+    } else {
+      console.log('Success');
+    }
+
+    // mutationLogbook.mutate({ ...formValues, bearer: bearer || null });
   };
 
   return (
@@ -292,9 +352,28 @@ export function LogbookPage() {
                           />
                         </td>
                         <td className="py-4 px-3">
-                          <Button type="button" variant="link">
-                            Kirim
-                          </Button>
+                          {res.evidenceTask && (
+                            <>
+                              <Button
+                                type="button"
+                                variant="link"
+                                onClick={() => showDialogLogbook(res)}
+                              >
+                                Kirim
+                              </Button>
+                              <LogbookDialog
+                                data={selectedData}
+                                showDialog={isOpenLogbook}
+                                closeDialog={() => closeDialogLogbook()}
+                                updateLogbook={(formValues) =>
+                                  updateLogbook(formValues)
+                                }
+                                isLoading={mutationLogbook.isLoading}
+                                isError={mutationLogbook.isError}
+                                isSuccess={mutationLogbook.isSuccess}
+                              />
+                            </>
+                          )}
                         </td>
                       </tr>
                     ))}
