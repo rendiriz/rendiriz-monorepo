@@ -109,7 +109,7 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
       logbooks: {
         create: [
           {
-            commitId: gitlabData.id,
+            // Field relation dont insert
             projectId: projectMap.get(gitlabData.project_id)?.id || '',
             projectName: projectMap.get(gitlabData.project_id)?.name || '',
             nameTask: gitlabData.title,
