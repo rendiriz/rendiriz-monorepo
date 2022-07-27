@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { v4 as uuidv4 } from 'uuid';
 import { prisma } from '../../server/db/client';
 
 const projectMap = new Map<number, { id: string; name: string; repo: string }>([
@@ -110,6 +111,7 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     logbookBody.push({
+      id: uuidv4(),
       commitId: gitlabData.id,
       projectId: projectMap.get(gitlabData.project_id)?.id || '',
       projectName: projectMap.get(gitlabData.project_id)?.name || '',
