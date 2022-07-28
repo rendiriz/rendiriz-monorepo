@@ -84,7 +84,7 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(400).json({ message: 'Invalid user' });
   }
 
-  body.commits.forEach(async (commit: any) => {
+  const insert = body.commits.map(async (commit: any) => {
     // Get Gitlab Commit
     const gitlab = await fetch(
       `https://gitlab.com/api/v4/projects/${id}/repository/commits/${commit.id}`,
@@ -128,7 +128,7 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
       },
     };
 
-    await prisma.commit.create({
+    return await prisma.commit.create({
       data: commitBody,
       include: {
         logbooks: true,
@@ -136,8 +136,11 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   });
 
+  const commits = await Promise.all(insert);
+
   res.status(200).json({
     project_id: id,
+    data: commits,
   });
 };
 
