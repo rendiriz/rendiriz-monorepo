@@ -1,17 +1,16 @@
-import { Blob } from 'buffer';
-import * as fs from 'fs';
-import FormData from 'form-data';
 import * as trpc from '@trpc/server';
 import { createRouter } from './context';
 import { z } from 'zod';
 import ImageKit from 'imagekit';
-import { format, parseISO, parse } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { pagination } from '@rendiriz-ecosystem/shared/utils';
 import { Logbook, Logbooks } from '@rendiriz-ecosystem/groupware/types';
 import type { TPagination } from '@rendiriz-ecosystem/shared/types';
 
 export type Logbook = z.infer<typeof Logbook>;
 export type Logbooks = z.infer<typeof Logbooks>;
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const logbookRouter = createRouter()
   .middleware(async ({ ctx, next }) => {
@@ -108,6 +107,8 @@ export const logbookRouter = createRouter()
         throw new trpc.TRPCError({ code: 'INTERNAL_SERVER_ERROR' });
       }
 
+      await delay(5000);
+
       // Update Logbook
       const updatedLogbook = await ctx.prisma.logbook.update({
         where: { id: input.id },
@@ -147,76 +148,21 @@ export const logbookRouter = createRouter()
         throw new trpc.TRPCError({ code: 'NOT_FOUND' });
       }
 
-      // Convert
-      const image = await fetch(input.documentTask);
-      // const arrayBuffer = await image.buffer();
-      const newblob = await image.blob();
-      // const newfile = new File([newblob], `${input.id}.png`, {
-      //   type: 'image/png',
-      // });
-
-      // const newfile = fs
-      //   .createWriteStream(`${input.id}.png`)
-      //   .write(arrayBuffer);
-
-      // console.log(input.imageFile);
-
-      // Send to Groupware
-      // const formData = new FormData();
-      // formData.append('projectId', '602b9477621200001db91977');
-      // // formData.append('projectId', logbook.projectId);
-      // formData.append('projectName', 'Portal Data Jabar');
-      // // formData.append('projectName', logbook.projectName);
-      // formData.append('nameTask', logbook.nameTask);
-      // formData.append('tupoksiJabatanId', logbook.tupoksiJabatanId);
-      // formData.append('isMainTask', logbook.isMainTask || '');
-      // formData.append('dateTask', input.dateSend);
-      // formData.append('difficultyTask', String(input.difficultyTask));
-      // formData.append('isDocumentLink', logbook.isDocumentLink);
-      // formData.append('documentTask', logbook.documentTask);
-      // formData.append('workPlace', input.workPlace);
-      // formData.append('organizerTask', input.organizerTask);
-      // // formData.append('evidenceTask', newfile);
-      // // formData.append('evidenceTask', new Blob([newblob]), {
-      // //   filename: `${input.id}.png`,
-      // //   contentType: 'image/png',
-      // // });
-      // formData.append('evidenceTask', newblob, `${input.id}.png`);
-
-      // const send = formData.submit(
-      //   {
-      //     host: 'groupware-api.digitalservice.id',
-      //     path: '/logbook',
-      //     headers: { authorization: `Bearer ${input.bearer}` },
-      //   },
-      //   (err, res) => {
-      //     if (err) throw err;
-      //     console.log(res.statusCode);
-      //   },
-      // );
-      // const sendResult = await Promise.resolve(send);
-
-      // if (!sendResult) {
-      //   console.log(sendResult);
-      //   throw new trpc.TRPCError({ code: 'INTERNAL_SERVER_ERROR' });
-      // }
-
       // Update Logbook
-      // const dateSend = new Date(
-      //   format(parseISO(input.dateSend), 'yyyy-MM-dd HH:mm:ss'),
-      // );
-      // const updatedLogbook = await ctx.prisma.logbook.update({
-      //   where: { id: input.id },
-      //   data: {
-      //     dateSend,
-      //     difficultyTask: input.difficultyTask,
-      //     workPlace: input.workPlace,
-      //     organizerTask: input.organizerTask,
-      //     isStatus: 'send',
-      //   },
-      // });
+      const dateSend = new Date(
+        format(parseISO(input.dateSend), 'yyyy-MM-dd HH:mm:ss'),
+      );
+      const updatedLogbook = await ctx.prisma.logbook.update({
+        where: { id: input.id },
+        data: {
+          dateSend,
+          difficultyTask: input.difficultyTask,
+          workPlace: input.workPlace,
+          organizerTask: input.organizerTask,
+          isStatus: 'send',
+        },
+      });
 
-      return logbook;
-      // return updatedLogbook;
+      return updatedLogbook;
     },
   });

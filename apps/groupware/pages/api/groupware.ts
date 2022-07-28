@@ -36,21 +36,26 @@ const createItem = async (req: NextApiRequest, res: NextApiResponse) => {
     'evidenceTask',
   ].map((key) => {
     data.fields[key] && formData.append(key, data.fields[key]);
-    data.files[key] &&
-      formData.append(key, fs.createReadStream(data.files[key].filepath));
+
+    if (data.files[key]) {
+      const newfilepath = '/tmp/' + data.files[key].originalFilename;
+      fs.renameSync(data.files[key].filepath, newfilepath);
+      const file = fs.createReadStream(newfilepath);
+      formData.append(key, file);
+    }
   });
 
-  const config = {
-    method: 'post',
-    url: `https://groupware-api.digitalservice.id/logbook/`,
-    headers: {
-      ...formData.getHeaders(),
-      Authorization: req.headers['authorization'] as string,
+  const { data: groupware } = await axios.post(
+    `https://groupware-api.digitalservice.id/logbook/`,
+    formData,
+    {
+      headers: {
+        ...formData.getHeaders(),
+        Authorization: req.headers['authorization'] as string,
+      },
     },
-    data: formData,
-  };
+  );
 
-  const groupware = await axios(config);
   return groupware;
 };
 
@@ -64,9 +69,14 @@ export default async function handler(
     case 'POST':
       try {
         const groupware = createItem(req, res);
-        res.status(200).json(groupware);
+
+        if (Object.entries(groupware).length > 0) {
+          res.status(200).json({ status: 'success', data: groupware });
+        }
+
+        res.status(200).json({ status: 'error', data: groupware });
       } catch (err: any) {
-        return res.status(500).json({ message: err.message });
+        return res.status(500).json({ status: 'error', message: err });
       }
       break;
     default:

@@ -29,6 +29,7 @@ const DisplayingErrorMessagesSchema = Yup.object().shape({
   documentTask: Yup.string().required('Required'),
   workPlace: Yup.string().required('Required'),
   organizerTask: Yup.string().required('Required'),
+  evidenceTask: Yup.string().required('Required'),
 });
 
 export const LogbookDialog: React.FC<TLogbookDialog> = (props) => {
@@ -107,6 +108,7 @@ export const LogbookDialog: React.FC<TLogbookDialog> = (props) => {
                       documentTask: data ? (data.documentTask as string) : '',
                       workPlace: data ? (data.workPlace as string) : '',
                       organizerTask: data ? (data.organizerTask as string) : '',
+                      evidenceTask: data ? (data.evidenceTask as string) : '',
                     }}
                     validationSchema={DisplayingErrorMessagesSchema}
                     onSubmit={(values) => {
@@ -231,6 +233,11 @@ export const LogbookDialog: React.FC<TLogbookDialog> = (props) => {
                                 src={data && data.evidenceTask}
                                 width={1280}
                                 height={720}
+                              />
+                              <Field
+                                className="block px-3 py-2 mr-2 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Evidence Task"
+                                name="evidenceTask"
                               />
                             </>
                           )}

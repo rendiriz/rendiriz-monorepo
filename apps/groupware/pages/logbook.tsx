@@ -136,17 +136,23 @@ export function LogbookPage() {
   };
 
   const updateLogbook = async (formValues: any) => {
-    const image = await fetch(`/api/image?url=${formValues.documentTask}`);
+    const image = await fetch(formValues.evidenceTask);
     const imageBlob = await image.blob();
 
-    const imageFile = new File([imageBlob], `${formValues.id}.png`, {
+    const imageName = `${formValues.projectId}-${formValues.id}.png`;
+    const imageFile = new File([imageBlob], imageName, {
       type: 'image/png',
     });
 
+    if (!imageFile) {
+      console.error('Image File not found');
+      return;
+    }
+
     // Save to Groupware
     const formData = new FormData();
-    formData.append('projectId', '602b9477621200001db91977');
-    formData.append('projectName', 'Portal Data Jabar');
+    formData.append('projectId', formValues.projectId);
+    formData.append('projectName', formValues.projectName);
     formData.append('nameTask', formValues.nameTask);
     formData.append('tupoksiJabatanId', formValues.tupoksiJabatanId);
     formData.append('isMainTask', formValues.isMainTask || false);
@@ -170,15 +176,12 @@ export function LogbookPage() {
     });
     const groupwareResult = await groupware.json();
 
-    console.log(groupwareResult);
-
-    if (!groupwareResult) {
-      console.log('Error');
-    } else {
-      console.log('Success');
+    if (groupwareResult.status === 'error') {
+      console.error('Error');
+      return;
     }
 
-    // mutationLogbook.mutate({ ...formValues, bearer: bearer || null });
+    mutationLogbook.mutate({ ...formValues, bearer: bearer || null });
   };
 
   return (
