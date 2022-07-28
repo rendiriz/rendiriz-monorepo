@@ -57,7 +57,8 @@ model VerificationToken {
 }
 
 model Commit {
-  id              String    @id
+  id              String    @id @default(cuid())
+  commitId        String
   short_id        String
   created_at      DateTime
   title           String

@@ -92,7 +92,7 @@ const getCommit = async (req: NextApiRequest, res: NextApiResponse) => {
     const gitlabData = await gitlab.json();
 
     const commitBody = {
-      id: gitlabData.id,
+      commitId: gitlabData.id,
       short_id: gitlabData.short_id,
       created_at: gitlabData.created_at,
       title: gitlabData.title,
