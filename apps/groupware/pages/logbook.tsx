@@ -136,7 +136,14 @@ export function LogbookPage() {
   };
 
   const updateLogbook = async (formValues: any) => {
-    const image = await fetch(formValues.evidenceTask);
+    const image = await fetch(
+      formValues.evidenceTask + '?timcook=' + Date.now(),
+      {
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      },
+    );
     const imageBlob = await image.blob();
 
     const imageName = `${formValues.projectId}-${formValues.id}.png`;
