@@ -70,15 +70,14 @@ export default async function handler(
       try {
         const groupware = createItem(req, res);
 
-        if (Object.entries(groupware).length > 0) {
-          res.status(200).json({ status: 'success', data: groupware });
+        if (Object.keys(groupware).length > 0) {
+          return res.status(200).json({ status: 'success', data: groupware });
         }
 
-        res.status(200).json({ status: 'error', data: groupware });
+        return res.status(200).json({ status: 'error', data: groupware });
       } catch (err: any) {
         return res.status(500).json({ status: 'error', message: err });
       }
-      break;
     default:
       res.setHeader('Allow', ['POST']);
       res.status(405).end(`Method ${method} Not Allowed`);
