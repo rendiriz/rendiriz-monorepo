@@ -1,18 +1,14 @@
 import { Container } from '@rendiriz-ecosystem/groupware/components';
-import { trpc } from '../utils/trpc';
+import { useSession } from 'next-auth/react';
 
 export function HomePage() {
-  const { data } = trpc.useQuery(['example.hello', { text: 'client' }]);
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
+  const { data: session } = useSession();
 
   return (
     <Container>
-      <div className="bg-red-400">
-        <div className="py-10">{data.greeting}</div>
-      </div>
+      <h1 className="font-medium leading-tight text-5xl mt-0 mb-2">
+        {!session ? 'Halo!' : `Halo ${session.user?.name}!`}
+      </h1>
     </Container>
   );
 }

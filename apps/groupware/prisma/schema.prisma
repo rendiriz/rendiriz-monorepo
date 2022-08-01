@@ -55,3 +55,42 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Commit {
+  id              String    @id @default(cuid())
+  commitId        String
+  short_id        String
+  created_at      DateTime
+  title           String
+  message         String
+  author_name     String
+  author_email    String
+  authored_date   DateTime
+  committer_name  String
+  committer_email String
+  committed_date  DateTime
+  web_url         String
+  status          String?
+  project_id      Int
+  logbooks        Logbook[]
+}
+
+model Logbook {
+  id               String    @id @default(cuid())
+  commitId         String
+  projectId        String
+  projectName      String
+  nameTask         String
+  tupoksiJabatanId String
+  dateTask         DateTime
+  dateSend         DateTime?
+  difficultyTask   Int
+  evidenceTask     String?
+  documentTask     String
+  workPlace        String    @default("WFH")
+  organizerTask    String    @default("JDS")
+  isMainTask       Boolean?
+  isDocumentLink   Boolean   @default(true)
+  isStatus         String
+  commit           Commit    @relation(fields: [commitId], references: [id], onDelete: Cascade)
+}

@@ -5,6 +5,7 @@
     "groupware": "apps/groupware",
     "groupware-components": "libs/groupware/components",
     "groupware-e2e": "apps/groupware-e2e",
+    "groupware-types": "libs/groupware/types",
     "personal": "apps/personal",
     "personal-components": "libs/personal/components",
     "personal-config": "libs/personal/config",
@@ -14,6 +15,9 @@
     "personal-hooks": "libs/personal/hooks",
     "personal-lib": "libs/personal/lib",
     "personal-templates": "libs/personal/templates",
-    "personal-utils": "libs/personal/utils"
+    "personal-utils": "libs/personal/utils",
+    "shared-components": "libs/shared/components",
+    "shared-types": "libs/shared/types",
+    "shared-utils": "libs/shared/utils"
   }
 }
