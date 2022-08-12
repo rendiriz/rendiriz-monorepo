@@ -45,7 +45,7 @@ const createItem = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   });
 
-  const { data: groupware } = await axios.post(
+  const groupware = await axios.post(
     `https://groupware-api.digitalservice.id/logbook/`,
     formData,
     {
@@ -69,12 +69,9 @@ export default async function handler(
     case 'POST':
       try {
         const groupware = createItem(req, res);
+        const { data } = await groupware;
 
-        if (Object.keys(groupware).length > 0) {
-          return res.status(200).json({ status: 'success', data: groupware });
-        }
-
-        return res.status(200).json({ status: 'error', data: groupware });
+        return res.status(200).json({ status: 'success', data });
       } catch (err: any) {
         return res.status(500).json({ status: 'error', message: err });
       }
