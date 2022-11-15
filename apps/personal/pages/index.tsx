@@ -6,7 +6,11 @@ import { site } from '@rendiriz-ecosystem/personal/config';
 import { useIsomorphicLayoutEffect } from '@rendiriz-ecosystem/personal/hooks';
 import { DefaultContainer } from '@rendiriz-ecosystem/personal/templates';
 import { Footer } from '@rendiriz-ecosystem/personal/templates';
-import { Hero, WorkPreview } from '@rendiriz-ecosystem/personal/components';
+import {
+  HeroV2,
+  Project,
+  WorkPreview,
+} from '@rendiriz-ecosystem/personal/components';
 
 export function Home() {
   const main = useRef<HTMLInputElement>(null);
@@ -52,7 +56,8 @@ export function Home() {
           data-scroll-section
           className={classNames('h-[200px] lg:h-[250px]')}
         />
-        <Hero />
+        <HeroV2 />
+        <Project />
         <WorkPreview />
         <Footer theme={theme} setTheme={setTheme} />
       </main>

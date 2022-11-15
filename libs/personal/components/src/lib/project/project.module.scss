@@ -1,0 +1,16 @@
+/* stylelint-disable selector-class-pattern */
+.main {
+  @apply mb-[150px] lg:mb-[200px];
+  @apply px-6 md:px-16 lg:px-20 xl:px-52;
+
+  .background {
+    margin-left: -100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 200px);
+    height: 100%;
+    background-image: url('https://ik.imagekit.io/tlk1n6viqhs/rendiriz_com/dot_SGn7rQ69c.png');
+    background-repeat: repeat;
+  }
+}

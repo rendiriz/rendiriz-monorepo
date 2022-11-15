@@ -1,5 +1,7 @@
 export * from './lib/example/example';
 export * from './lib/hero/hero';
+export * from './lib/hero-v2/hero-v2';
+export * from './lib/project/project';
 export * from './lib/work-hero/work-hero';
 export * from './lib/work-preview/work-preview';
 export * from './lib/work-preview-v2/work-preview-v2';
